@@ -1,1 +1,1 @@
-# Sistema-de-Gesti-n-de-Activos-y-Soporte-SIGAS--Equipo-5
+# Sistema-de-Gestion-de-Activos-y-Soporte-SIGAS--Equipo-5
