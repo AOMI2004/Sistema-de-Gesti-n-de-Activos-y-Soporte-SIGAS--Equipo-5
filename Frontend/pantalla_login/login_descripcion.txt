@@ -1,4 +1,4 @@
-Archivos principales: dashboard.html, sidebar.css, panel_admin.js.
-* Diseño de la interfaz: Panel de control (Dashboard) con un menú lateral de navegación y tarjetas de indicadores rápidos en la pantalla principal.
-* Elementos Principales: Menú lateral con opciones ("Catálogo de Equipos", "Usuarios", etc.) y tarjetas de resumen numérico ("Equipos Prestados Hoy", "Material con Bajo Stock").
-* Funcionalidad: Funciona como la pantalla de inicio central para el Administrador, permitiendo monitorear un resumen del estado del inventario y acceder a los demás módulos del sistema.
+Archivos principales: login.html, estilos_login.css, auth.js.
+* Diseño de la interfaz: Pantalla centrada con el logotipo del ITS y un formulario de acceso institucional.
+* Elementos Principales: Campos de "Correo Institucional" y "Contraseña", botón de "Ingresar", y enlace de recuperación de contraseña.
+* Funcionalidad: Valida las credenciales del usuario y detecta automáticamente su rol (Administrador, Docente o Alumno) para redirigirlo a su portal correspondiente.
