@@ -19,7 +19,7 @@ public class LoginController extends HttpServlet {
     // Configuración de tu base de datos local
     private static final String DB_URL = "jdbc:mysql://localhost:3306/sigas_db";
     private static final String DB_USER = "root"; 
-    private static final String DB_PASSWORD = "SIGAS123"; // ¡Cámbiala por la clave de tu Workbench!
+    private static final String DB_PASSWORD = "SIGAS123";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
@@ -32,9 +32,15 @@ public class LoginController extends HttpServlet {
             return;
         }
 
+        // Validación estricta de correo institucional
+        if (!correo.endsWith("@saltillo.tecnm.mx")) {
+            response.sendRedirect("../Frontend/pantalla_login/login.html?error=correo_invalido");
+            return;
+        }
+
         // Conexión real a la base de datos
         try {
-            // Cargar el driver de MySQL que acabas de agregar
+            // Cargar el driver de MySQL
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -43,7 +49,7 @@ public class LoginController extends HttpServlet {
             String sql = "SELECT Nombre_Completo, Rol FROM USUARIO WHERE Correo = ? AND Contrasena_Hash = ? AND Estatus = 'Activo'";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, correo);
-            stmt.setString(2, password); // Nota: En un futuro aquí aplicaremos encriptación
+            stmt.setString(2, password);
             
             ResultSet rs = stmt.executeQuery();
 
