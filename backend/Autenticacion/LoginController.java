@@ -19,7 +19,7 @@ public class LoginController extends HttpServlet {
     // Configuración de tu base de datos local
     private static final String DB_URL = "jdbc:mysql://localhost:3306/sigas_db";
     private static final String DB_USER = "root"; 
-    private static final String DB_PASSWORD = "tu_contraseña_aqui"; // ¡Cámbiala por la clave de tu Workbench!
+    private static final String DB_PASSWORD = "SIGAS123"; // ¡Cámbiala por la clave de tu Workbench!
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
