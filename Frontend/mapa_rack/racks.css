@@ -1,0 +1,74 @@
+/* Sidebar Estilo Original */
+.sidebar {
+    background-color: #111827; /* Azul/Gris oscuro profundo */
+    min-width: 280px;
+}
+
+.sidebar a {
+    color: #9ca3af;
+    text-decoration: none;
+    padding: 12px 25px;
+    display: block;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+.sidebar a.active {
+    background-color: #3b82f6; /* Azul brillante para el activo */
+    color: white;
+}
+
+.sidebar i {
+    margin-right: 10px;
+}
+
+/* Tarjetas de Rack */
+.rack-card {
+    background: white;
+    border-radius: 15px;
+    transition: transform 0.2s ease;
+}
+
+.rack-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-container-rack {
+    width: 45px;
+    height: 45px;
+    background: #eff6ff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-success-light { background-color: #dcfce7; }
+
+/* Botones de Selección de Rack */
+.btn-rack-selector {
+    background: white;
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.btn-rack-selector:hover:not(:disabled) {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.btn-rack-selector.active {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+}
+
+.list-container {
+    border-style: dashed !important;
+}
