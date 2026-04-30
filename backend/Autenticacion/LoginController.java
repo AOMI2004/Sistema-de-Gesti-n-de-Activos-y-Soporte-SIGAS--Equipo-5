@@ -27,14 +27,17 @@ public class LoginController extends HttpServlet {
         String correo = request.getParameter("correo");
         String password = request.getParameter("password");
 
+        // Obtenemos la ruta base exacta de tu proyecto automáticamente
+        String contextPath = request.getContextPath();
+
         if (correo == null || correo.trim().isEmpty() || password == null || password.trim().isEmpty()) {
-            response.sendRedirect("../Frontend/pantalla_login/login.html?error=campos_vacios");
+            response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=campos_vacios");
             return;
         }
 
         // Validación estricta de correo institucional
         if (!correo.endsWith("@saltillo.tecnm.mx")) {
-            response.sendRedirect("../Frontend/pantalla_login/login.html?error=correo_invalido");
+            response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=correo_invalido");
             return;
         }
 
@@ -62,10 +65,11 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("usuarioLogueado", nombreUsuario);
                 session.setAttribute("rol", rolUsuario);
                 
-                response.sendRedirect("../Frontend/dashboard_administrador/dashboard.html");
+                // Redirigir al dashboard con la ruta correcta
+                response.sendRedirect(contextPath + "/Frontend/dashboard_administrador/dashboard.html");
             } else {
                 // No lo encontró, credenciales inválidas
-                response.sendRedirect("../Frontend/pantalla_login/login.html?error=credenciales_invalidas");
+                response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=credenciales_invalidas");
             }
             
             rs.close();
@@ -75,7 +79,7 @@ public class LoginController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             // Error de conexión
-            response.sendRedirect("../Frontend/pantalla_login/login.html?error=error_servidor");
+            response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=error_servidor");
         }
     }
 }

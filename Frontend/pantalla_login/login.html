@@ -53,15 +53,15 @@
         <h3 class="fw-bold mb-3">de Saltillo</h3>
         <p class="text-muted mb-4 small">Inicia sesión en tu cuenta institucional</p>
 
-        <form>
+        <form action="/Sistema-de-Gesti-n-de-Activos-y-Soporte-SIGAS--Equipo-5/LoginController" method="POST">
             <div class="mb-3 text-start">
                 <label for="correo" class="form-label fw-bold" style="font-size: 0.9rem;">Correo Institucional</label>
-                <input type="email" class="form-control" id="correo" placeholder="alguien@saltillo.tecnm.mx" required>
+                <input type="email" name="correo" class="form-control" id="correo" placeholder="alguien@saltillo.tecnm.mx" required>
             </div>
             
             <div class="mb-4 text-start">
                 <label for="password" class="form-label fw-bold" style="font-size: 0.9rem;">Contraseña</label>
-                <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+                <input type="password" name="password" class="form-control" id="password" placeholder="••••••••" required>
             </div>
 
             <button type="submit" class="btn btn-ingresar w-100 mb-3 text-white">Ingresar</button>
