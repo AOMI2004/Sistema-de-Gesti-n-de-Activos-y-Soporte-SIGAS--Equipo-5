@@ -1,74 +1,148 @@
-/* Sidebar Estilo Original */
+
+
 .sidebar {
-    background-color: #111827; /* Azul/Gris oscuro profundo */
+    background-color: #111827; /* Azul/Gris oscuro profundo conforme a image_e29440.png */
     min-width: 280px;
+    max-width: 280px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
 }
 
+/* Título del Panel */
+.sidebar h4 {
+    letter-spacing: 1px;
+    padding: 20px 0;
+}
+
+/* Etiquetas de Categoría (INFRAESTRUCTURA, OPERACIONES, etc.) */
+.nav-label {
+    color: #4b5563; /* Gris suave */
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 20px 25px 10px;
+}
+
+/* Enlaces de Navegación */
 .sidebar a {
-    color: #9ca3af;
+    color: #9ca3af; /* Color de texto inactivo */
     text-decoration: none;
     padding: 12px 25px;
-    display: block;
-    font-size: 0.95rem;
-    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    border-left: 4px solid transparent; /* Para el efecto de borde al estar activo */
 }
 
+/* Iconos del Sidebar */
+.sidebar a i {
+    margin-right: 15px;
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Efecto Hover */
 .sidebar a:hover {
     background-color: rgba(255, 255, 255, 0.05);
-    color: white;
+    color: #ffffff;
 }
 
+/* Estado Activo (Sección actual) */
 .sidebar a.active {
-    background-color: #3b82f6; /* Azul brillante para el activo */
-    color: white;
+    background-color: #1e293b; /* Fondo un poco más claro que el sidebar */
+    color: #3b82f6; /* Azul brillante para resaltar */
+    border-left: 4px solid #3b82f6;
+    font-weight: 600;
 }
 
-.sidebar i {
-    margin-right: 10px;
+/* Separador Inferior */
+.sidebar hr {
+    border-color: rgba(255, 255, 255, 0.1);
+    margin: 20px 25px;
 }
+
+/* ==========================================================================
+   COMPONENTES DE CONTENIDO (RACKS Y TARJETAS)
+   ========================================================================== */
 
 /* Tarjetas de Rack */
 .rack-card {
-    background: white;
+    background: #ffffff;
     border-radius: 15px;
-    transition: transform 0.2s ease;
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .rack-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .icon-container-rack {
-    width: 45px;
-    height: 45px;
-    background: #eff6ff;
-    border-radius: 10px;
+    width: 48px;
+    height: 48px;
+    background: #eff6ff; /* Azul muy pálido */
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #3b82f6;
 }
 
-.bg-success-light { background-color: #dcfce7; }
+/* Estados de Auditoría */
+.bg-success-light { background-color: #dcfce7 !important; }
+.bg-warning-light { background-color: #fef9c3 !important; }
+.bg-danger-light { background-color: #fee2e2 !important; }
 
-/* Botones de Selección de Rack */
+/* Botones de Selección de Rack (Vista Docente) */
 .btn-rack-selector {
-    background: white;
+    background: #ffffff;
     border: 2px solid #f1f5f9;
     border-radius: 12px;
-    transition: 0.2s;
+    padding: 15px;
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .btn-rack-selector:hover:not(:disabled) {
     border-color: #3b82f6;
-    background: #eff6ff;
+    background: #f8fafc;
 }
 
 .btn-rack-selector.active {
     border-color: #3b82f6;
     background: #eff6ff;
-    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+    color: #1d4ed8;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
 }
 
+.btn-rack-selector:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #f3f4f6;
+}
+
+/* Contenedores de Listas */
 .list-container {
-    border-style: dashed !important;
+    background-color: #ffffff;
+    border: 2px dashed #e2e8f0 !important;
+    border-radius: 12px;
+}
+
+/* Barra de progreso personalizada */
+.progress {
+    background-color: #f1f5f9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
 }
