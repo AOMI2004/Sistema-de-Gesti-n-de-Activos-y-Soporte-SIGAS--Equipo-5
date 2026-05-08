@@ -8,6 +8,7 @@
     <title>SIGAS - Inventario de Equipos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <style>
         body { background-color: #f8f9fa; font-family: Arial, sans-serif; overflow-x: hidden; }
@@ -21,18 +22,17 @@
         .btn-add:hover { background-color: #ceead6; color: #1e8e3e; }
         .search-bar { background-color: #f1f3f4; border: none; border-radius: 8px; }
         .table th { color: #5f6368; font-size: 0.85rem; text-transform: uppercase; }
-        .icon-action { color: #5f6368; cursor: pointer; margin-right: 10px; transition: 0.2s; }
+        .icon-action { color: #5f6368; cursor: pointer; margin-right: 10px; transition: 0.2s; text-decoration: none; }
         .icon-action:hover { color: #0d1b2a; }
         .icon-delete:hover { color: #d93025; }
+        .icon-edit:hover { color: #0a58ca; }
     </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- MENÚ LATERAL -->
             <div class="col-md-2 sidebar d-flex flex-column p-0">
                 <h4 class="text-center mb-4 text-white fw-bold mt-3"><i class="bi bi-layers"></i> Admin Panel</h4>
-                <!-- CORRECCIÓN: Rutas relativas corregidas para que no se pierda -->
                 <a href="../dashboard_administrador/dashboard.html"><i class="bi bi-grid-1x2"></i> Inicio</a>
                 <a href="inventario.jsp" class="active"><i class="bi bi-pc-display"></i> Catálogo de Equipos</a>
                 <a href="#"><i class="bi bi-box-seam"></i> Catálogo de Materiales</a>
@@ -46,15 +46,27 @@
                 </div>
             </div>
 
-            <!-- CONTENIDO PRINCIPAL -->
             <div class="col-md-10 main-content">
                 <h2 class="fw-bold mb-4">Inventario de Equipos Principales</h2>
 
-                <!-- MENSAJES DE ÉXITO O ERROR -->
                 <% if(request.getParameter("registro") != null) { %>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>¡Éxito!</strong> El equipo se ha registrado correctamente en la base de datos.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>¡Éxito!</strong> El equipo se ha registrado correctamente.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } %>
+                
+                <% if(request.getParameter("eliminacion") != null) { %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>¡Eliminado!</strong> El equipo se ha borrado correctamente del sistema.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <% } %>
+
+                <% if(request.getParameter("edicion") != null) { %>
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>¡Actualizado!</strong> Los datos del equipo se guardaron correctamente.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 <% } %>
 
@@ -115,15 +127,20 @@
                                 <td class="text-muted"><%= numSerie %></td>
                                 <td><span class="badge <%= badgeClass %> bg-opacity-10 border rounded-pill px-3 py-2"><i class="bi <%= iconClass %>"></i> <%= estado %></span></td>
                                 <td>
-                                    <i class="bi bi-pencil icon-action"></i>
-                                    <i class="bi bi-trash icon-action icon-delete text-danger"></i>
+                                    <a href="#" class="icon-action icon-edit" onclick="abrirModalEditar('<%= idQr %>', '<%= marca %>', '<%= modelo %>', '<%= numSerie %>', '<%= estado %>')">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    
+                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '<%= request.getContextPath() %>/EliminarEquipo?id_qr=<%= idQr %>')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
                                 </td>
                             </tr>
                             <%
                                     }
                                     rs.close(); stmt.close(); conn.close();
                                 } catch (Exception e) {
-                                    out.println("<tr><td colspan='5' class='text-center text-danger'>Error al cargar base de datos: " + e.getMessage() + "</td></tr>");
+                                    out.println("<tr><td colspan='5' class='text-center text-danger'>Error: " + e.getMessage() + "</td></tr>");
                                 }
                             %>
                         </tbody>
@@ -133,7 +150,6 @@
         </div>
     </div>
 
-    <!-- MODAL PARA AGREGAR EQUIPO -->
     <div class="modal fade" id="modalAgregarEquipo" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -141,7 +157,6 @@
                     <h5 class="modal-title fw-bold">Registrar Nuevo Equipo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <!-- CORRECCIÓN: Asegúrate de que esta ruta llegue al controlador -->
                 <form action="../../AgregarEquipo" method="POST">
                     <div class="modal-body">
                         <div class="mb-3"><label class="form-label fw-bold text-muted small">ID QR</label><input type="text" class="form-control" name="id_qr" required></div>
@@ -167,6 +182,89 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalEditarEquipo" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Editar Equipo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="../../EditarEquipo" method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" name="id_qr" id="edit_id_qr_hidden">
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-muted small">ID QR (No editable)</label>
+                            <input type="text" class="form-control bg-light" id="edit_id_qr_display" readonly>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold text-muted small">MARCA</label>
+                                <input type="text" class="form-control" name="marca" id="edit_marca" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold text-muted small">MODELO</label>
+                                <input type="text" class="form-control" name="modelo" id="edit_modelo" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-muted small">NÚMERO DE SERIE</label>
+                            <input type="text" class="form-control" name="numero_serie" id="edit_numero_serie" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-muted small">ESTADO</label>
+                            <select class="form-select" name="estado" id="edit_estado">
+                                <option value="Disponible">Disponible</option>
+                                <option value="En Mantenimiento">En Mantenimiento</option>
+                                <option value="Prestado">Prestado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" style="background-color: #0d1b2a; border: none;">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Función para confirmar la eliminación (SweetAlert)
+        function confirmarEliminacion(event, url) {
+            event.preventDefault(); 
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción eliminará el equipo de la base de datos de forma permanente.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#0d1b2a',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            })
+        }
+
+        // Función para abrir el modal de Edición y rellenarlo con los datos
+        function abrirModalEditar(id, marca, modelo, serie, estado) {
+            document.getElementById('edit_id_qr_hidden').value = id;
+            document.getElementById('edit_id_qr_display').value = id;
+            document.getElementById('edit_marca').value = marca;
+            document.getElementById('edit_modelo').value = modelo;
+            document.getElementById('edit_numero_serie').value = serie;
+            document.getElementById('edit_estado').value = estado;
+            
+            var modalEdit = new bootstrap.Modal(document.getElementById('modalEditarEquipo'));
+            modalEdit.show();
+        }
+    </script>
 </body>
 </html>
