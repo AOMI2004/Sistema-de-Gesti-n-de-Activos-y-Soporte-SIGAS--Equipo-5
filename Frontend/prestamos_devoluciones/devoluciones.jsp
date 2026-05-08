@@ -18,23 +18,17 @@
             <div class="sidebar d-flex flex-column p-0">
                 <h4 class="text-center mb-4 text-white fw-bold mt-3"><i class="bi bi-layers"></i> Admin Panel</h4>
                 <a href="../dashboard_administrador/dashboard.html"><i class="bi bi-grid-1x2"></i> Inicio</a>
-                
                 <div class="px-3 py-2 text-muted small fw-bold mt-2">INFRAESTRUCTURA</div>
                 <a href="../mapa_rack/racks.jsp"><i class="bi bi-hdd-rack"></i> Gestión de Racks</a>
                 <a href="../gestion_inventario/inventario.jsp"><i class="bi bi-pc-display"></i> Catálogo de Equipos</a>
                 <a href="../gestion_inventario/materiales.jsp"><i class="bi bi-box-seam"></i> Catálogo de Materiales</a>
-                
                 <div class="px-3 py-2 text-muted small fw-bold mt-2">OPERACIONES</div>
                 <a href="../auditoria_QR/auditoria.jsp"><i class="bi bi-qr-code-scan"></i> Auditoría QR</a>
                 <a href="devoluciones.jsp" class="active"><i class="bi bi-arrow-left-right"></i> Préstamos y Devoluciones</a>
-                <a href="../reportes/reportes.html"><i class="bi bi-file-earmark-medical"></i> Reportes</a>
-                
+                <a href="../reportes/reportes.jsp"><i class="bi bi-file-earmark-medical"></i> Reportes</a>
                 <div class="px-3 py-2 text-muted small fw-bold mt-2">SISTEMA</div>
                 <a href="../gestion_usuarios/usuarios.jsp"><i class="bi bi-people"></i> Usuarios</a>
-                
-                <div class="mt-auto mb-4">
-                    <a href="<%= request.getContextPath() %>/Logout"><i class="bi bi-box-arrow-left"></i> Cerrar Sesión</a>
-                </div>
+                <div class="mt-auto mb-4"><a href="<%= request.getContextPath() %>/Logout"><i class="bi bi-box-arrow-left"></i> Cerrar Sesión</a></div>
             </div>
 
             <div class="main-content flex-grow-1 p-4 bg-light">
@@ -48,8 +42,9 @@
                     </button>
                 </div>
 
-                <% if(request.getParameter("registro") != null) { %><div class="alert alert-success fw-bold"><i class="bi bi-check-circle me-2"></i>Préstamo autorizado y guardado correctamente.</div><% } %>
-                <% if(request.getParameter("devolucion") != null) { %><div class="alert alert-primary fw-bold"><i class="bi bi-info-circle me-2"></i>Equipo devuelto correctamente al laboratorio.</div><% } %>
+                <% if(request.getParameter("registro") != null) { %><div class="alert alert-success fw-bold"><i class="bi bi-check-circle me-2"></i>Préstamo autorizado.</div><% } %>
+                <% if(request.getParameter("devolucion") != null) { %><div class="alert alert-primary fw-bold"><i class="bi bi-info-circle me-2"></i>Equipo devuelto correctamente.</div><% } %>
+                <% if(request.getParameter("reporte") != null) { %><div class="alert alert-danger fw-bold"><i class="bi bi-tools me-2"></i>Equipo enviado a mantenimiento.</div><% } %>
 
                 <div class="card border-0 shadow-sm p-4 mx-auto mb-4">
                     <form action="devoluciones.jsp" method="GET" class="input-group">
@@ -61,7 +56,7 @@
                     <%
                         String qrBusqueda = request.getParameter("buscar_qr");
                         if(qrBusqueda != null && !qrBusqueda.trim().isEmpty()) {
-                            qrBusqueda = qrBusqueda.trim(); // ELIMINA ESPACIOS FANTASMAS
+                            qrBusqueda = qrBusqueda.trim();
                             boolean encontrado = false;
                             try {
                                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -73,6 +68,7 @@
                                 
                                 if(rs.next()) {
                                     encontrado = true;
+                                    int idPrestamoActivo = rs.getInt("ID_Prestamo");
                     %>
                                     <div class="text-center mt-4">
                                         <h6 class="text-success fw-bold mb-3"><i class="bi bi-record-circle-fill"></i> Préstamo Encontrado</h6>
@@ -83,10 +79,40 @@
                                                 <p class="mb-0 text-muted small">Equipo: <%= rs.getString("Modelo") %> (QR: <%= qrBusqueda %>)</p>
                                             </div>
                                         </div>
-                                        <div class="mt-3 mx-auto" style="max-width: 500px;">
-                                            <a href="<%= request.getContextPath() %>/DevolverEquipo?id_prestamo=<%= rs.getInt("ID_Prestamo") %>&id_equipo=<%= qrBusqueda %>" class="btn btn-success w-100 py-2 fw-bold rounded-3">
-                                                <i class="bi bi-check2-circle me-2"></i> Confirmar Devolución
-                                            </a>
+                                        
+                                        <div class="row g-3 mt-3 mx-auto" style="max-width: 500px;">
+                                            <div class="col-md-6">
+                                                <a href="<%= request.getContextPath() %>/DevolverEquipo?id_prestamo=<%= idPrestamoActivo %>&id_equipo=<%= qrBusqueda %>" class="btn btn-success w-100 py-3 fw-bold rounded-3">
+                                                    <i class="bi bi-check2-circle me-2"></i> Devolver Bien
+                                                </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-danger w-100 py-3 fw-bold rounded-3" data-bs-toggle="modal" data-bs-target="#modalFalla">
+                                                    <i class="bi bi-tools me-2"></i> Reportar Falla
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="modalFalla" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <form action="<%= request.getContextPath() %>/ReportarFalla" method="POST" class="modal-content border-0 shadow">
+                                                <div class="modal-header bg-light border-0">
+                                                    <h5 class="modal-title fw-bold">Reportar Daño o Falla</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body p-4 text-start">
+                                                    <input type="hidden" name="id_equipo" value="<%= qrBusqueda %>">
+                                                    <input type="hidden" name="id_prestamo" value="<%= idPrestamoActivo %>">
+                                                    
+                                                    <label class="form-label small fw-bold text-muted">Describa el problema del equipo:</label>
+                                                    <textarea name="descripcion" class="form-control bg-light border-0 mb-4" rows="4" placeholder="Ej. El lente está rayado..." required></textarea>
+                                                    
+                                                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold" style="background-color: #0b5361; border: none;">
+                                                        Confirmar Falla y Enviar a Mantenimiento
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                     <%
@@ -96,7 +122,7 @@
                             if(!encontrado) {
                     %>
                                 <div class="alert alert-warning text-center fw-bold mt-4 mb-0">
-                                    <i class="bi bi-exclamation-triangle-fill me-2"></i> No se encontró un préstamo activo para: <%= qrBusqueda %>
+                                    <i class="bi bi-exclamation-triangle-fill me-2"></i> No se encontró préstamo activo para: <%= qrBusqueda %>
                                 </div>
                     <%
                             }
@@ -105,13 +131,11 @@
                 </div>
 
                 <div class="card border-0 shadow-sm p-4">
-                    <h5 class="fw-bold mb-4"><i class="bi bi-list-task me-2"></i>Historial General de Préstamos</h5>
+                    <h5 class="fw-bold mb-4"><i class="bi bi-list-task me-2"></i>Historial General</h5>
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead class="table-light">
-                                <tr>
-                                    <th>Folio</th><th>Usuario</th><th>Equipo (QR)</th><th>Fecha Salida</th><th>Estado</th><th>Acciones</th>
-                                </tr>
+                                <tr><th>Folio</th><th>Usuario</th><th>Equipo (QR)</th><th>Fecha Salida</th><th>Estado</th><th>Acciones</th></tr>
                             </thead>
                             <tbody>
                                 <%
@@ -130,12 +154,13 @@
                                     <td><span class="badge bg-secondary"><i class="bi bi-qr-code"></i> <%= rsT.getString("ID_Equipo_QR") %></span></td>
                                     <td><%= rsT.getDate("Fecha_Salida") %></td>
                                     <td>
-                                        <% if(activo) { %><span class="badge bg-warning text-dark px-3">En Préstamo</span><% } 
-                                           else { %><span class="badge bg-success px-3">Devuelto</span><% } %>
+                                        <% if(activo) { %><span class="badge bg-warning text-dark px-3">En Préstamo</span>
+                                        <% } else if(rsT.getString("Estado_Prestamo").contains("Falla")) { %><span class="badge bg-danger px-3">Falla</span>
+                                        <% } else { %><span class="badge bg-success px-3">Devuelto</span><% } %>
                                     </td>
                                     <td>
                                         <% if(activo) { %>
-                                            <a href="#" onclick="confirmarDevolucion('<%= request.getContextPath() %>/DevolverEquipo?id_prestamo=<%= rsT.getInt("ID_Prestamo") %>&id_equipo=<%= rsT.getString("ID_Equipo_QR") %>')" class="btn btn-sm btn-outline-success fw-bold">Devolver</a>
+                                            <a href="#" onclick="confirmarDevolucion('<%= request.getContextPath() %>/DevolverEquipo?id_prestamo=<%= rsT.getInt("ID_Prestamo") %>&id_equipo=<%= rsT.getString("ID_Equipo_QR") %>')" class="btn btn-sm btn-outline-success fw-bold">Devolver Bien</a>
                                         <% } else { %>
                                             <span class="text-muted small"><i class="bi bi-check2-all"></i> Cerrado</span>
                                         <% } %>
@@ -160,7 +185,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label fw-bold small text-muted">SELECCIONAR USUARIO</label>
+                        <label class="form-label fw-bold small text-muted">USUARIO</label>
                         <select class="form-select" name="matricula" required>
                             <option value="" disabled selected>Selecciona un alumno o docente...</option>
                             <% 
