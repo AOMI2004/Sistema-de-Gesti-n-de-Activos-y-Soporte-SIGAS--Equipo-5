@@ -13,18 +13,17 @@
 <body>
     <div class="container-fluid p-0">
         <div class="d-flex">
-            <!-- SIDEBAR FINAL (Estructura Unificada) -->
             <div class="sidebar d-flex flex-column p-0">
                 <h4 class="text-center mb-4 text-white fw-bold mt-3">
                     <i class="bi bi-layers"></i> Admin Panel
                 </h4>
                 
-                <a href="#" class="active"><i class="bi bi-grid-1x2"></i> Inicio</a>
+                <a href="dashboard.html" class="active"><i class="bi bi-grid-1x2"></i> Inicio</a>
                 
                 <div class="px-3 py-2 text-muted small fw-bold mt-2">INFRAESTRUCTURA</div>
-                <a href="../mapa_rack/racks.html"><i class="bi bi-hdd-rack"></i> Gestión de Racks</a>
-                <a href="../gestion_inventario/equipos.html"><i class="bi bi-pc-display"></i> Catálogo de Equipos</a>
-                <a href="#"><i class="bi bi-box-seam"></i> Catálogo de Materiales</a>
+                <a href="../mapa_rack/racks.jsp"><i class="bi bi-hdd-rack"></i> Gestión de Racks</a>
+                <a href="../gestion_inventario/inventario.jsp"><i class="bi bi-pc-display"></i> Catálogo de Equipos</a>
+                <a href="../gestion_inventario/materiales.jsp"><i class="bi bi-box-seam"></i> Catálogo de Materiales</a>
                 
                 <div class="px-3 py-2 text-muted small fw-bold mt-2">OPERACIONES</div>
                 <a href="../auditoria_QR/auditoria.html"><i class="bi bi-qr-code-scan"></i> Auditoría QR</a>
@@ -34,14 +33,11 @@
                 <div class="px-3 py-2 text-muted small fw-bold mt-2">SISTEMA</div>
                 <a href="#"><i class="bi bi-people"></i> Usuarios</a>
                 
-                
                 <div class="mt-auto mb-4">
-                    <!-- Manteniendo la conexión al controlador Java Logout -->
                     <a href="../../Logout"><i class="bi bi-box-arrow-left"></i> Cerrar Sesión</a>
                 </div>
             </div>
 
-            <!-- CONTENIDO PRINCIPAL -->
             <div class="main-content flex-grow-1 p-4 bg-light">
                 <header class="mb-4">
                     <h2 class="fw-bold mb-1">Dashboard</h2>
@@ -49,7 +45,6 @@
                 </header>
 
                 <div class="row g-4">
-                    <!-- Equipos Prestados -->
                     <div class="col-md-4">
                         <div class="stat-card d-flex justify-content-between align-items-center shadow-sm">
                             <div>
@@ -62,7 +57,6 @@
                         </div>
                     </div>
                     
-                    <!-- Bajo Stock -->
                     <div class="col-md-4">
                         <div class="stat-card d-flex justify-content-between align-items-center shadow-sm">
                             <div>
@@ -75,7 +69,6 @@
                         </div>
                     </div>
 
-                    <!-- Mantenimiento -->
                     <div class="col-md-4">
                         <div class="stat-card d-flex justify-content-between align-items-center shadow-sm">
                             <div>
@@ -89,13 +82,11 @@
                     </div>
                 </div>
                 
-                <!-- Sección adicional opcional: Actividad Reciente -->
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="card border-0 shadow-sm p-4">
                             <h5 class="fw-bold mb-3">Actividad de Auditoría Reciente</h5>
                             <p class="text-muted small">Última auditoría QR realizada hace 2 horas por Admin.</p>
-                            <!-- Aquí podrías incluir un gráfico o lista pequeña -->
                         </div>
                     </div>
                 </div>

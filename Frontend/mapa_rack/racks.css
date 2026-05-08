@@ -1,7 +1,15 @@
-
+/* ==========================================================================
+   CONFIGURACIÓN BASE (Previene brincos del menú lateral)
+   ========================================================================== */
+body {
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+}
 
 .sidebar {
-    background-color: #111827; /* Azul/Gris oscuro profundo conforme a image_e29440.png */
+    background-color: #111827;
     min-width: 280px;
     max-width: 280px;
     height: 100vh;
@@ -19,7 +27,7 @@
 
 /* Etiquetas de Categoría (INFRAESTRUCTURA, OPERACIONES, etc.) */
 .nav-label {
-    color: #4b5563; /* Gris suave */
+    color: #4b5563; 
     font-size: 0.7rem;
     font-weight: 800;
     text-transform: uppercase;
@@ -29,7 +37,7 @@
 
 /* Enlaces de Navegación */
 .sidebar a {
-    color: #9ca3af; /* Color de texto inactivo */
+    color: #9ca3af; 
     text-decoration: none;
     padding: 12px 25px;
     display: flex;
@@ -37,7 +45,7 @@
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
-    border-left: 4px solid transparent; /* Para el efecto de borde al estar activo */
+    border-left: 4px solid transparent;
 }
 
 /* Iconos del Sidebar */
@@ -56,16 +64,10 @@
 
 /* Estado Activo (Sección actual) */
 .sidebar a.active {
-    background-color: #1e293b; /* Fondo un poco más claro que el sidebar */
-    color: #3b82f6; /* Azul brillante para resaltar */
+    background-color: #1e293b; 
+    color: #3b82f6; 
     border-left: 4px solid #3b82f6;
     font-weight: 600;
-}
-
-/* Separador Inferior */
-.sidebar hr {
-    border-color: rgba(255, 255, 255, 0.1);
-    margin: 20px 25px;
 }
 
 /* ==========================================================================
@@ -88,7 +90,7 @@
 .icon-container-rack {
     width: 48px;
     height: 48px;
-    background: #eff6ff; /* Azul muy pálido */
+    background: #eff6ff; 
     border-radius: 12px;
     display: flex;
     align-items: center;

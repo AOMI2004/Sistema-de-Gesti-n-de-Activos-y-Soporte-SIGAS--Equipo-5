@@ -1,3 +1,10 @@
+/* Configuración base para evitar el brinco de la pantalla */
+body {
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+}
+
 /* Sidebar Estilo Final (Unificado para todo el sistema) */
 .sidebar {
     background-color: #111827;
