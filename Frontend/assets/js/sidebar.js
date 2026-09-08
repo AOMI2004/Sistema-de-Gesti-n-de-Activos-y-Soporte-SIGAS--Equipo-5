@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <a href="${basePath}dashboard_administrador/dashboard.html" data-page="dashboard"><i class="bi bi-grid-1x2"></i> Inicio</a>
             
             <div class="px-3 py-2 text-muted small fw-bold mt-2" style="font-size: 0.7rem; letter-spacing: 1px;">INFRAESTRUCTURA</div>
-            <a href="${basePath}mapa_rack/racks.html" data-page="racks"><i class="bi bi-hdd-rack"></i> Gestión de Racks</a>
+            <a href="${basePath}mapa_rack/racks.jsp" data-page="racks"><i class="bi bi-hdd-rack"></i> Gestión de Racks</a>
             <a href="${basePath}gestion_inventario/inventario.html" data-page="inventario"><i class="bi bi-pc-display"></i> Catálogo de Equipos</a>
             <a href="${basePath}gestion_inventario/materiales.html" data-page="materiales"><i class="bi bi-box-seam"></i> Catálogo de Materiales</a>
             
