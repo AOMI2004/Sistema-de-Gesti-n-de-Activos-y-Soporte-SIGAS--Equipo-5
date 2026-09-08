@@ -139,7 +139,7 @@
     <script>
         function confirmarEliminacion(event, url) {
             event.preventDefault(); 
-            Swal.fire({ title: '¿Estás seguro?', text: "Se eliminará permanentemente.", icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Sí, eliminará, cancelButtonText: 'Cancelar' }).then((result) => { if (result.isConfirmed) { window.location.href = url; } })
+            Swal.fire({ title: '¿Estás seguro?', text: "Se eliminará permanentemente.", icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Sí, confirmar' }).then((result) => { if (result.isConfirmed) { window.location.href = url; } })
         }
         function abrirModalEditar(id, nombre, desc, stock, rack) {
             document.getElementById('edit_id_material_hidden').value = id;

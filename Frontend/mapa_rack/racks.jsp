@@ -108,7 +108,7 @@
     <script>
         function confirmarEliminacion(event, url) {
             event.preventDefault(); 
-            Swal.fire({ title: '¿Borrar Rack?', text: "Se eliminará la ubicación del sistema.", icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Sí, eliminará }).then((result) => { if (result.isConfirmed) { window.location.href = url; } })
+            Swal.fire({ title: '¿Borrar Rack?', text: "Se eliminará la ubicación del sistema.", icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Sí, confirmar' }).then((result) => { if (result.isConfirmed) { window.location.href = url; } })
         }
         function abrirModalEditar(id, nombre) {
             document.getElementById('edit_id_rack_hidden').value = id;

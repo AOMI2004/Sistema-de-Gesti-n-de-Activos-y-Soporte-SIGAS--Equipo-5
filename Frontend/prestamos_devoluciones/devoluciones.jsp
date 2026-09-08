@@ -159,7 +159,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function confirmarDevolucion(url) {
-            Swal.fire({ title: '¿Recibir equipo?', text: "El equipo regresará al inventario como Disponible.", icon: 'info', showCancelButton: true, confirmButtonColor: '#198754', confirmButtonText: 'Sí, recibir' }).then((result) => {
+            Swal.fire({ title: '¿Recibir equipo?', text: "El equipo regresará al inventario como Disponible.", icon: 'info', showCancelButton: true, confirmButtonColor: '#198754', confirmButtonText: 'Sí, confirmar' }).then((result) => {
                 if (result.isConfirmed) { window.location.href = url; }
             });
         }
