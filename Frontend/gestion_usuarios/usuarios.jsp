@@ -1,3 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="backend.DAO.UsuarioDAO" %>
+<%@ page import="backend.Modelos.Usuario" %>
+<%
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
+    List<Usuario> listaUsuarios = usuarioDAO.obtenerUsuarios();
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,7 +32,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        </tbody>
+<% for (Usuario usuario : listaUsuarios) { %>
+                            <tr>
+                                <td class="fw-bold"><%= usuario.getMatriculaId() %></td>
+                                <td><%= usuario.getNombreCompleto() %></td>
+                                <td class="text-muted"><%= usuario.getCorreo() %></td>
+                                <td><span class="badge bg-primary bg-opacity-10 border border-primary border-opacity-10 text-primary rounded-pill px-3 py-2"><i class="bi bi-person-badge me-1"></i> <%= usuario.getRol() %></span></td>
+                                <td>
+                                    <% if ("Activo".equals(usuario.getEstatus())) { %>
+                                        <span class="badge bg-success bg-opacity-10 border border-success border-opacity-10 text-success rounded-pill px-3 py-2"><i class="bi bi-check-circle-fill me-1"></i> Activo</span>
+                                    <% } else { %>
+                                        <span class="badge bg-danger bg-opacity-10 border border-danger border-opacity-10 text-danger rounded-pill px-3 py-2"><i class="bi bi-x-circle-fill me-1"></i> Inactivo</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <a href="#" class="icon-action icon-edit" onclick="abrirModalEditar('<%= usuario.getMatriculaId() %>', '<%= usuario.getNombreCompleto() %>', '<%= usuario.getCorreo() %>', '<%= usuario.getRol() %>', '<%= usuario.getEstatus() %>')">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '../../EliminarUsuario?matricula_id=<%= usuario.getMatriculaId() %>')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <% } %>
+</tbody>
                 </table>
             </div>
         </div>

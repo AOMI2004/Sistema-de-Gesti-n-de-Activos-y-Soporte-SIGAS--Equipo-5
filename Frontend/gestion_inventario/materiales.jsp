@@ -1,3 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="backend.DAO.MaterialDAO" %>
+<%@ page import="backend.Modelos.Material" %>
+<%
+    MaterialDAO materialDAO = new MaterialDAO();
+    List<Material> listaMateriales = materialDAO.obtenerMateriales();
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -55,7 +63,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                        </tbody>
+<% for (Material material : listaMateriales) { %>
+                            <tr>
+                                <td class="fw-bold"><%= material.getIdMaterial() %></td>
+                                <td><%= material.getNombrePieza() %></td>
+                                <td class="text-muted"><%= material.getDescripcion() %></td>
+                                <td><span class="badge bg-primary bg-opacity-10 border border-primary border-opacity-10 text-primary rounded-pill px-3 py-2"><%= material.getCantidadStock() %> pz</span></td>
+                                <td class="text-muted"><%= material.getIdRack() %></td>
+                                <td>
+                                    <a href="#" class="icon-action icon-edit" onclick="abrirModalEditar('<%= material.getIdMaterial() %>', '<%= material.getNombrePieza() %>', '<%= material.getDescripcion() %>', '<%= material.getCantidadStock() %>', '<%= material.getIdRack() %>')">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '../../EliminarMaterial?id_material=<%= material.getIdMaterial() %>')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <% } %>
+</tbody>
                     </table>
                 </div>
             </div>

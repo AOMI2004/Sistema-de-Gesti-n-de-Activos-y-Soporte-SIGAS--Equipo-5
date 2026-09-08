@@ -1,3 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="backend.DAO.ReporteFallaDAO" %>
+<%@ page import="backend.Modelos.ReporteFalla" %>
+<%
+    ReporteFallaDAO reporteDAO = new ReporteFallaDAO();
+    List<ReporteFalla> listaReportes = reporteDAO.obtenerReportes();
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,7 +45,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                        </tbody>
+<% for (ReporteFalla reporte : listaReportes) { %>
+                            <tr>
+                                <td class="fw-bold"><%= reporte.getIdReporte() %></td>
+                                <td><%= reporte.getIdEquipoQR() %></td>
+                                <td><%= reporte.getFechaReporte() %></td>
+                                <td class="text-muted"><%= reporte.getDescripcionDano() %></td>
+                                <td>
+                                    <% if ("Pendiente".equals(reporte.getEstadoResolucion())) { %>
+                                        <span class="badge bg-danger bg-opacity-10 border border-danger border-opacity-10 text-danger rounded-pill px-3 py-2"><i class="bi bi-exclamation-triangle-fill me-1"></i> Pendiente</span>
+                                    <% } else { %>
+                                        <span class="badge bg-success bg-opacity-10 border border-success border-opacity-10 text-success rounded-pill px-3 py-2"><i class="bi bi-check-circle-fill me-1"></i> Resuelto</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <% if ("Pendiente".equals(reporte.getEstadoResolucion())) { %>
+                                    <button class="btn btn-sm btn-outline-success fw-bold px-3 rounded-pill" onclick="confirmarResolucion('../../ResolverReporte?id_reporte=<%= reporte.getIdReporte() %>')">
+                                        <i class="bi bi-tools"></i> Resolver
+                                    </button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% } %>
+</tbody>
                         </table>
                     </div>
                 </div>

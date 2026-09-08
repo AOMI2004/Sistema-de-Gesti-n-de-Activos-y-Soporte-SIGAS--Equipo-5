@@ -24,13 +24,13 @@ public class LoginController extends HttpServlet {
         String contextPath = request.getContextPath();
 
         if (correo == null || correo.trim().isEmpty() || password == null || password.trim().isEmpty()) {
-            response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=campos_vacios");
+            response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.jsp?error=campos_vacios");
             return;
         }
 
         // Validación estricta de correo institucional
         if (!correo.endsWith("@saltillo.tecnm.mx")) {
-            response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=correo_invalido");
+            response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.jsp?error=correo_invalido");
             return;
         }
 
@@ -46,13 +46,13 @@ public class LoginController extends HttpServlet {
             session.setAttribute("matricula", usuario.getMatriculaId());
             
             // Redirigir al dashboard con la ruta correcta
-            response.sendRedirect(contextPath + "/Frontend/dashboard_administrador/dashboard.html");
+            response.sendRedirect(contextPath + "/Frontend/dashboard_administrador/dashboard.jsp");
         } else {
             // Verificar si el error fue por contraseña o porque el correo no existe
             if (usuarioDAO.existeCorreo(correo)) {
-                response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=password_incorrecta");
+                response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.jsp?error=password_incorrecta");
             } else {
-                response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=correo_no_existe");
+                response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.jsp?error=correo_no_existe");
             }
         }
     }

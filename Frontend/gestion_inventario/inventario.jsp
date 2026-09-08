@@ -1,3 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="backend.DAO.EquipoDAO" %>
+<%@ page import="backend.Modelos.Equipo" %>
+<%
+    EquipoDAO equipoDAO = new EquipoDAO();
+    List<Equipo> listaEquipos = equipoDAO.obtenerEquipos();
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -57,7 +65,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                        </tbody>
+<% for (Equipo equipo : listaEquipos) { %>
+                            <tr>
+                                <td class="fw-bold"><%= equipo.getIdEquipoQR() %></td>
+                                <td><%= equipo.getMarca() %> / <%= equipo.getModelo() %></td>
+                                <td class="text-muted"><%= equipo.getNumSerie() %></td>
+                                <td>
+                                    <% if ("Disponible".equals(equipo.getEstado())) { %>
+                                        <span class="badge bg-success bg-opacity-10 border border-success border-opacity-10 text-success rounded-pill px-3 py-2"><i class="bi bi-check-circle-fill me-1"></i> Disponible</span>
+                                    <% } else if ("En Mantenimiento".equals(equipo.getEstado())) { %>
+                                        <span class="badge bg-warning bg-opacity-10 border border-warning border-opacity-10 text-warning rounded-pill px-3 py-2"><i class="bi bi-tools me-1"></i> En Mantenimiento</span>
+                                    <% } else { %>
+                                        <span class="badge bg-primary bg-opacity-10 border border-primary border-opacity-10 text-primary rounded-pill px-3 py-2"><i class="bi bi-person-badge me-1"></i> Prestado</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <a href="#" class="icon-action icon-edit" onclick="abrirModalEditar('<%= equipo.getIdEquipoQR() %>', '<%= equipo.getMarca() %>', '<%= equipo.getModelo() %>', '<%= equipo.getNumSerie() %>', '<%= equipo.getEstado() %>')">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '../../EliminarEquipo?id_qr=<%= equipo.getIdEquipoQR() %>')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <% } %>
+</tbody>
                     </table>
                 </div>
             </div>

@@ -21,6 +21,6 @@ public class LogoutController extends HttpServlet {
         
         // 3. Regresar al guardia de la entrada (pantalla de login)
         String contextPath = request.getContextPath();
-        response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html");
+        response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.jsp");
     }
 }

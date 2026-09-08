@@ -1,3 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="backend.DAO.PrestamoDAO" %>
+<%@ page import="backend.Modelos.Prestamo" %>
+<%
+    PrestamoDAO prestamoDAO = new PrestamoDAO();
+    List<Prestamo> listaPrestamos = prestamoDAO.obtenerPrestamos();
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -85,7 +93,30 @@
                                 <tr><th>Folio</th><th>Usuario</th><th>Equipo (QR)</th><th>Fecha Salida</th><th>Estado</th><th>Acciones</th></tr>
                             </thead>
                             <tbody>
-                        </tbody>
+<% for (Prestamo prestamo : listaPrestamos) { %>
+                            <tr>
+                                <td class="fw-bold"><%= prestamo.getIdPrestamo() %></td>
+                                <td><%= prestamo.getMatriculaId() %></td>
+                                <td><%= prestamo.getIdEquipoQR() %></td>
+                                <td class="text-muted"><%= prestamo.getFechaSalida() %></td>
+                                <td class="text-danger fw-bold"><%= prestamo.getFechaLimite() %></td>
+                                <td>
+                                    <% if ("Activo".equals(prestamo.getEstadoPrestamo())) { %>
+                                        <span class="badge bg-warning bg-opacity-10 border border-warning border-opacity-10 text-warning rounded-pill px-3 py-2"><i class="bi bi-clock-history me-1"></i> Activo</span>
+                                    <% } else { %>
+                                        <span class="badge bg-success bg-opacity-10 border border-success border-opacity-10 text-success rounded-pill px-3 py-2"><i class="bi bi-check-circle-fill me-1"></i> Devuelto</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <% if ("Activo".equals(prestamo.getEstadoPrestamo())) { %>
+                                    <button class="btn btn-sm btn-outline-success fw-bold px-3 rounded-pill" onclick="confirmarDevolucion('../../DevolverEquipo?id_prestamo=<%= prestamo.getIdPrestamo() %>')">
+                                        <i class="bi bi-check2-circle"></i> Marcar Devuelto
+                                    </button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% } %>
+</tbody>
                         </table>
                     </div>
                 </div>

@@ -65,4 +65,23 @@ public class UsuarioDAO {
         }
         return false;
     }
+
+    public java.util.List<Usuario> obtenerUsuarios() {
+        java.util.List<Usuario> lista = new java.util.ArrayList<>();
+        String sql = "SELECT * FROM USUARIO";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while(rs.next()) {
+                Usuario u = new Usuario();
+                u.setMatriculaId(rs.getString("Matricula_ID"));
+                u.setNombreCompleto(rs.getString("Nombre_Completo"));
+                u.setCorreo(rs.getString("Correo"));
+                u.setRol(rs.getString("Rol"));
+                u.setEstatus(rs.getString("Estatus"));
+                lista.add(u);
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        return lista;
+    }
 }
