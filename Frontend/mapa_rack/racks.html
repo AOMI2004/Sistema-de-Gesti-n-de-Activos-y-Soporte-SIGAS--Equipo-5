@@ -23,9 +23,7 @@
                         <i class="bi bi-plus-lg me-2"></i>Nuevo Rack
                     </button>
                 </header>
-                <div class="alert alert-success alert-dismissible fade show"><strong>¡Éxito!</strong> Rack registrado.<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
-                <div class="alert alert-danger alert-dismissible fade show"><strong>¡Eliminado!</strong> Rack borrado.<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
-                <div class="alert alert-primary alert-dismissible fade show"><strong>¡Actualizado!</strong> Datos guardados.<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+
                 <div class="row g-4 mb-5">
                     
                     <div class="col-md-4">
@@ -109,6 +107,29 @@
             document.getElementById('edit_nombre_ubicacion').value = nombre;
             new bootstrap.Modal(document.getElementById('modalEditarRack')).show();
         }
+
+        // Mostrar alertas basadas en la URL (para Backend)
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('registro') && urlParams.get('registro') === 'exito') {
+                Swal.fire('¡Éxito!', 'Rack registrado correctamente.', 'success');
+            } else if (urlParams.has('eliminacion') && urlParams.get('eliminacion') === 'exito') {
+                Swal.fire('¡Eliminado!', 'Rack borrado correctamente.', 'success');
+            } else if (urlParams.has('edicion') && urlParams.get('edicion') === 'exito') {
+                Swal.fire('¡Actualizado!', 'Datos guardados correctamente.', 'success');
+            } else if (urlParams.has('error')) {
+                const error = urlParams.get('error');
+                let mensaje = 'Ocurrió un error inesperado.';
+                if (error === 'foranea') mensaje = 'No se puede eliminar el rack porque tiene equipos asociados.';
+                else if (error === 'bd') mensaje = 'Error de conexión con la base de datos.';
+                Swal.fire('Error', mensaje, 'error');
+            }
+            
+            // Limpiar la URL para que no vuelva a salir la alerta si recarga la página
+            if(window.history.replaceState && window.location.search) {
+                window.history.replaceState(null, null, window.location.pathname);
+            }
+        });
     </script>
 </body>
 </html>
