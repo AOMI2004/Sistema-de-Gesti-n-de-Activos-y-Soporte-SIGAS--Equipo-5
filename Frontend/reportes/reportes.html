@@ -102,5 +102,36 @@
             })
         }
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('registro') && urlParams.get('registro') === 'exito') {
+                Swal.fire('¡Éxito!', 'Registro creado correctamente.', 'success');
+            } else if (urlParams.has('eliminacion') && urlParams.get('eliminacion') === 'exito') {
+                Swal.fire('¡Eliminado!', 'Registro borrado correctamente.', 'success');
+            } else if (urlParams.has('edicion') && urlParams.get('edicion') === 'exito') {
+                Swal.fire('¡Actualizado!', 'Datos guardados correctamente.', 'success');
+            } else if (urlParams.has('prestamo') && urlParams.get('prestamo') === 'exito') {
+                Swal.fire('¡Autorizado!', 'Préstamo registrado.', 'success');
+            } else if (urlParams.has('devolucion') && urlParams.get('devolucion') === 'exito') {
+                Swal.fire('¡Devuelto!', 'Equipo devuelto correctamente.', 'success');
+            } else if (urlParams.has('reporte') && urlParams.get('reporte') === 'exito') {
+                Swal.fire('¡Reportado!', 'Falla enviada a mantenimiento.', 'success');
+            } else if (urlParams.has('error')) {
+                const error = urlParams.get('error');
+                let mensaje = 'Ocurrió un error inesperado.';
+                if (error === 'foranea') mensaje = 'No se puede eliminar porque tiene registros asociados.';
+                else if (error === 'bd') mensaje = 'Error de conexión con la base de datos.';
+                Swal.fire('Error', mensaje, 'error');
+            }
+            
+            if(window.history.replaceState && window.location.search) {
+                window.history.replaceState(null, null, window.location.pathname);
+            }
+        });
+    </script>
 </body>
+
 </html>
