@@ -143,6 +143,34 @@
             }
         });
     </script>
-</body>
+<script>
+        function confirmarEliminacion(event, url) {
+            event.preventDefault(); 
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Se eliminará el usuario del sistema.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#0d1b2a',
+                confirmButtonText: 'Sí, confirmar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        }
+
+        function abrirModalEditar(matricula, nombre, correo, rol, estatus) {
+            document.getElementById('edit_matricula_hidden').value = matricula;
+            document.getElementById('edit_matricula_display').value = matricula;
+            document.getElementById('edit_nombre').value = nombre;
+            document.getElementById('edit_correo').value = correo;
+            document.getElementById('edit_rol').value = rol;
+            document.getElementById('edit_estatus').value = estatus;
+            new bootstrap.Modal(document.getElementById('modalEditarUsuario')).show();
+        }
+</script></body>
 
 </html>
