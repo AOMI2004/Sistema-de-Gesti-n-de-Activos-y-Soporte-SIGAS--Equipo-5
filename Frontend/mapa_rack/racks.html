@@ -27,16 +27,7 @@
                 <div class="alert alert-danger alert-dismissible fade show"><strong>¡Eliminado!</strong> Rack borrado.<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
                 <div class="alert alert-primary alert-dismissible fade show"><strong>¡Actualizado!</strong> Datos guardados.<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
                 <div class="row g-4 mb-5">
-                    <% 
-                        try {
-                            Class.forName("com.mysql.cj.jdbc.Driver");
-                            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigas_db", "root", "SIGAS123");
-                            Statement stmt = conn.createStatement();
-                            ResultSet rs = stmt.executeQuery("SELECT * FROM RACK_UBICACION");
-                            while(rs.next()) {
-                                int idRack = rs.getInt("ID_Rack");
-                                String nombre = rs.getString("Nombre_Ubicacion");
-                    %>
+                    
                     <div class="col-md-4">
                         <div class="card border-0 shadow-sm p-4 rack-card">
                             <div class="d-flex justify-content-between align-items-start">
@@ -56,11 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <%
-                            }
-                            rs.close(); stmt.close(); conn.close();
-                        } catch (Exception e) {}
-                    %>
+                    
                 </div>
                 <div class="card border-0 shadow-sm p-4 mt-4 bg-white">
                     <h5 class="fw-bold mb-4 text-secondary"><i class="bi bi-search me-2"></i>Vista Docente: Disponibilidad</h5>

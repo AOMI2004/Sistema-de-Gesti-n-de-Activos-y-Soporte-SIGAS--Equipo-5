@@ -24,13 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%
-                            try {
-                                Class.forName("com.mysql.cj.jdbc.Driver");
-                                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigas_db", "root", "SIGAS123");
-                                ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM USUARIO");
-                                while(rs.next()){
-                        %>
+                        
                         <tr>
                             <td>...</td>
                             <td>...</td>

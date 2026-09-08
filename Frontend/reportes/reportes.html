@@ -42,33 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%
-                                    try {
-                                        Class.forName("com.mysql.cj.jdbc.Driver");
-                                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigas_db", "root", "SIGAS123");
-                                        String sql = "SELECT r.ID_Reporte, r.Descripcion_Dano, r.Fecha_Reporte, r.Estado_Resolucion, r.ID_Equipo_QR, " +
-                                                     "e.Modelo, u.Nombre_Completo " +
-                                                     "FROM REPORTE_FALLA r " +
-                                                     "JOIN EQUIPO e ON r.ID_Equipo_QR = e.ID_Equipo_QR " +
-                                                     "JOIN PRESTAMO p ON r.ID_Prestamo = p.ID_Prestamo " +
-                                                     "JOIN USUARIO u ON p.Matricula_ID = u.Matricula_ID " +
-                                                     "ORDER BY r.Fecha_Reporte DESC";
-                                        Statement stmt = conn.createStatement();
-                                        ResultSet rs = stmt.executeQuery(sql);
-                                        boolean hayDatos = false;
-                                        while(rs.next()) {
-                                            hayDatos = true;
-                                            String estado = rs.getString("Estado_Resolucion");
-                                            String nombreCompleto = rs.getString("Nombre_Completo");
-                                            String iniciales = "";
-                                            String[] partesNombre = nombreCompleto.split(" ");
-                                            if(partesNombre.length >= 2) {
-                                                iniciales = partesNombre[0].substring(0,1) + partesNombre[1].substring(0,1);
-                                            } else {
-                                                iniciales = nombreCompleto.substring(0,2);
-                                            }
-                                            iniciales = iniciales.toUpperCase();
-                                %>
+                                
                                 <tr>
                                     <td class="ps-4">
                                         <div class="fw-bold text-dark">...</div>
@@ -100,18 +74,9 @@
                                             <span class="text-muted small"><i class="bi bi-check2-all"></i> Cerrado</span>
                                     </td>
                                 </tr>
-                                <% 
-                                        } 
-                                        if(!hayDatos) {
-                                %>
+                                
                                     <tr><td colspan="6" class="text-center py-5 text-muted"><i class="bi bi-inbox fs-1 d-block mb-2"></i> No hay reportes de fallas registrados en el sistema.</td></tr>
-                                <%
-                                        }
-                                        rs.close(); stmt.close(); conn.close(); 
-                                    } catch(Exception e) { 
-                                        out.print("<tr><td colspan='6' class='text-danger text-center'>Error de conexión con la BD. " + e.getMessage() + "</td></tr>");
-                                    } 
-                                %>
+                                
                             </tbody>
                         </table>
                     </div>

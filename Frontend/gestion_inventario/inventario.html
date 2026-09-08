@@ -66,31 +66,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% 
-                                String dbURL = "jdbc:mysql://localhost:3306/sigas_db";
-                                String dbUser = "root";
-                                String dbPass = "SIGAS123";
-                                try {
-                                    Class.forName("com.mysql.cj.jdbc.Driver");
-                                    Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
-                                    Statement stmt = conn.createStatement();
-                                    ResultSet rs = stmt.executeQuery("SELECT * FROM EQUIPO");
-                                    while(rs.next()) {
-                                        String idQr = rs.getString("ID_Equipo_QR");
-                                        String marca = rs.getString("Marca");
-                                        String modelo = rs.getString("Modelo");
-                                        String numSerie = rs.getString("Num_Serie");
-                                        String estado = rs.getString("Estado");
-                                        String badgeClass = "bg-success text-success border-success";
-                                        String iconClass = "bi-check-circle";
-                                        if("En Mantenimiento".equals(estado)) {
-                                            badgeClass = "bg-danger text-danger border-danger";
-                                            iconClass = "bi-wrench";
-                                        } else if("Prestado".equals(estado)) {
-                                            badgeClass = "bg-warning text-warning border-warning";
-                                            iconClass = "bi-box-arrow-right";
-                                        }
-                            %>
+                            
                             <tr>
                                 <td class="fw-bold">...</td>
                                 <td>... / ...</td>
@@ -105,13 +81,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <%
-                                    }
-                                    rs.close(); stmt.close(); conn.close();
-                                } catch (Exception e) {
-                                    out.println("<tr><td colspan='5' class='text-center text-danger'>Error: " + e.getMessage() + "</td></tr>");
-                                }
-                            %>
+                            
                         </tbody>
                     </table>
                 </div>
