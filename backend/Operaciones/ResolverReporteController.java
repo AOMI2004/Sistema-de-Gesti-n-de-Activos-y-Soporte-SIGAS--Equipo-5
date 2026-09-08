@@ -18,7 +18,7 @@ public class ResolverReporteController extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:4463/sigas_db", "root", "aster");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:4463/sigas_db", "root", "SIGAS123");
 
             // 1. Marcar el reporte como Resuelto
             String sqlReporte = "UPDATE REPORTE_FALLA SET Estado_Resolucion = 'Resuelto' WHERE ID_Reporte = ?";

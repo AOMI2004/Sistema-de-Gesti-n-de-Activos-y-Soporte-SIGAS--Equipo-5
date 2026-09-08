@@ -22,7 +22,7 @@ public class EditarUsuarioController extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:4463/sigas_db", "root", "aster");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:4463/sigas_db", "root", "SIGAS123");
             String sql = "UPDATE USUARIO SET Nombre_Completo = ?, Correo = ?, Rol = ?, Estatus = ? WHERE Matricula_ID = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, nombre);

@@ -18,7 +18,7 @@ public class DevolverEquipoController extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:4463/sigas_db", "root", "aster");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:4463/sigas_db", "root", "SIGAS123");
             
             // 1. Marcar préstamo como devuelto con la fecha de hoy
             String sqlPrestamo = "UPDATE PRESTAMO SET Fecha_Devolucion = CURRENT_DATE, Estado_Prestamo = 'Devuelto' WHERE ID_Prestamo = ?";

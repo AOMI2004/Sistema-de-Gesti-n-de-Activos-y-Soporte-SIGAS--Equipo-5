@@ -18,7 +18,7 @@ public class AuditoriaQRController extends HttpServlet {
 
         String url = "jdbc:mysql://localhost:4463/sigas_db";
         String usuario = "root";
-        String password = "aster";
+        String password = "SIGAS123";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

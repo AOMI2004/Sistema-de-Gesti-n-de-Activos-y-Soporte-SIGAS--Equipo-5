@@ -23,7 +23,7 @@ public class AgregarUsuarioController extends HttpServlet {
 
         String url = "jdbc:mysql://localhost:4463/sigas_db";
         String usuarioBD = "root";
-        String passwordBD = "aster";
+        String passwordBD = "SIGAS123";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
