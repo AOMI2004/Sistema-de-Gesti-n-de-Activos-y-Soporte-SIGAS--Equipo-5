@@ -1,4 +1,4 @@
-package Backend.Modelos;
+package backend.Modelos;
 
 public class Rack {
     private int idRack;

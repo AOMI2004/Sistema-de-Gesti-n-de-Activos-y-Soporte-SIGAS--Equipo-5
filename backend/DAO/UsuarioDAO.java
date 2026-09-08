@@ -1,7 +1,7 @@
-package Backend.DAO;
+package backend.DAO;
 
-import Backend.Infraestructura.DatabaseConnection;
-import Backend.Modelos.Usuario;
+import backend.Infraestructura.DatabaseConnection;
+import backend.Modelos.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

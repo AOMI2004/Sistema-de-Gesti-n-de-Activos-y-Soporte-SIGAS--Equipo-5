@@ -1,4 +1,4 @@
-package Backend.Inventario;
+package backend.Inventario;
 
 import java.io.IOException;
 import java.sql.Connection;

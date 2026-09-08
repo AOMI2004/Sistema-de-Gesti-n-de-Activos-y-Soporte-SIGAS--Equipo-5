@@ -1,5 +1,5 @@
-import Backend.DAO.UsuarioDAO;
-import Backend.Modelos.Usuario;
+import backend.DAO.UsuarioDAO;
+import backend.Modelos.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

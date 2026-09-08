@@ -1,4 +1,4 @@
-package Backend.Infraestructura;
+package backend.Infraestructura;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

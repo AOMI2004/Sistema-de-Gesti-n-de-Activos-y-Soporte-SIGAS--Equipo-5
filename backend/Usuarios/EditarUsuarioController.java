@@ -1,4 +1,4 @@
-package Backend.Usuarios;
+package backend.Usuarios;
 
 import java.io.IOException;
 import java.sql.Connection;

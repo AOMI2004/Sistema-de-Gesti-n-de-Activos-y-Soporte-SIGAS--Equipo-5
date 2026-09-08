@@ -1,7 +1,7 @@
-package Backend.Infraestructura;
+package backend.Infraestructura;
 
-import Backend.DAO.RackDAO;
-import Backend.Modelos.Rack;
+import backend.DAO.RackDAO;
+import backend.Modelos.Rack;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

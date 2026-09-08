@@ -1,4 +1,4 @@
-package Backend.Operaciones;
+package backend.Operaciones;
 
 import java.io.IOException;
 import java.sql.Connection;
