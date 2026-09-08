@@ -70,5 +70,42 @@
         </form>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('error')) {
+                const error = urlParams.get('error');
+                let titulo = 'Error al entrar';
+                let mensaje = 'Ocurrió un problema inesperado.';
+                
+                if (error === 'correo_no_existe') {
+                    titulo = 'Correo no encontrado';
+                    mensaje = 'Este correo no está registrado en el sistema. Verifica que lo hayas escrito bien.';
+                } else if (error === 'password_incorrecta') {
+                    titulo = 'Contraseña incorrecta';
+                    mensaje = 'La contraseña que ingresaste no es válida para este correo.';
+                } else if (error === 'campos_vacios') {
+                    mensaje = 'Por favor, llena todos los campos para iniciar sesión.';
+                } else if (error === 'correo_invalido') {
+                    mensaje = 'Debes usar un correo institucional válido (@saltillo.tecnm.mx).';
+                } else if (error === 'credenciales_invalidas') {
+                    mensaje = 'Credenciales inválidas o error de conexión.';
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: titulo,
+                    text: mensaje,
+                    confirmButtonColor: '#7b1e35'
+                });
+
+                // Limpiar la URL para que no vuelva a salir si recargan
+                if(window.history.replaceState) {
+                    window.history.replaceState(null, null, window.location.pathname);
+                }
+            }
+        });
+    </script>
 </body>
 </html>

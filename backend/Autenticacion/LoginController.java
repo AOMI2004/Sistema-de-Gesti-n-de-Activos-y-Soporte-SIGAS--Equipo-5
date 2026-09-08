@@ -48,8 +48,12 @@ public class LoginController extends HttpServlet {
             // Redirigir al dashboard con la ruta correcta
             response.sendRedirect(contextPath + "/Frontend/dashboard_administrador/dashboard.html");
         } else {
-            // No lo encontró, credenciales inválidas o error de servidor
-            response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=credenciales_invalidas");
+            // Verificar si el error fue por contraseña o porque el correo no existe
+            if (usuarioDAO.existeCorreo(correo)) {
+                response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=password_incorrecta");
+            } else {
+                response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=correo_no_existe");
+            }
         }
     }
 }

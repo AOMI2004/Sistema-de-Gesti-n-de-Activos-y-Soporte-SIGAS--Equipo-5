@@ -47,4 +47,22 @@ public class UsuarioDAO {
 
         return usuario;
     }
+
+    public boolean existeCorreo(String correo) {
+        String sql = "SELECT 1 FROM USUARIO WHERE Correo = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, correo);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error al verificar el correo: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
