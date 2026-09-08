@@ -184,7 +184,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#0d1b2a',
-                confirmButtonText: 'Sí, eliminar',
+                confirmButtonText: 'Sí, eliminará,
                 cancelButtonText: 'Cancelar',
                 reverseButtons: true
             }).then((result) => {

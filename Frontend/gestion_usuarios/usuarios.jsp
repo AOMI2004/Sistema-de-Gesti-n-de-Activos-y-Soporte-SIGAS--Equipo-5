@@ -102,7 +102,7 @@
             document.getElementById('e_nom').value = n;
             document.getElementById('e_cor').value = c;
             document.getElementById('e_rol').value = r;
-            document.getElementById('e_est').value = e;
+            document.getElementById('e_está).value = e;
             new bootstrap.Modal(document.getElementById('editModal')).show();
         }
         function confirmDel(m) {
