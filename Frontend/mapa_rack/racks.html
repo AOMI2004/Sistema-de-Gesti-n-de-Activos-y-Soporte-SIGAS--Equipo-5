@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="d-flex gap-2">
                                     <a href="#" class="text-primary" onclick="abrirModalEditar('...', '...')"><i class="bi bi-pencil fs-5"></i></a>
-                                    <a href="#" class="text-danger" onclick="confirmarEliminacion(event, '.../EliminarRack?id_rack=...')"><i class="bi bi-trash fs-5"></i></a>
+                                    <a href="#" class="text-danger" onclick="confirmarEliminacion(event, '../../EliminarRack?id_rack=...')"><i class="bi bi-trash fs-5"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header"><h5 class="modal-title fw-bold">Registrar Nuevo Rack</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-                <form action=".../AgregarRack" method="POST">
+                <form action="../../AgregarRack" method="POST">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label fw-bold text-muted small">UBICACIÓN O NOMBRE</label>
@@ -86,7 +86,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header"><h5 class="modal-title fw-bold">Editar Rack</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-                <form action=".../EditarRack" method="POST">
+                <form action="../../EditarRack" method="POST">
                     <div class="modal-body">
                         <input type="hidden" name="id_rack" id="edit_id_rack_hidden">
                         <div class="mb-3"><label class="form-label fw-bold text-muted small">NOMBRE O UBICACIÓN</label><input type="text" class="form-control" name="nombre_ubicacion" id="edit_nombre_ubicacion" required></div>

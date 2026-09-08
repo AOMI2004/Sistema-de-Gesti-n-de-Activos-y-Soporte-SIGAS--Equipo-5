@@ -68,7 +68,7 @@
                                 <td><i class="bi bi-hdd-rack text-muted"></i> Rack #...</td>
                                 <td>
                                     <a href="#" class="icon-action icon-edit" onclick="abrirModalEditar('...', '...', '...', '...', '...')"><i class="bi bi-pencil"></i></a>
-                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '.../EliminarMaterial?id_material=...')"><i class="bi bi-trash"></i></a>
+                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '../../EliminarMaterial?id_material=...')"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                             
@@ -82,7 +82,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header"><h5 class="modal-title fw-bold">Registrar Nuevo Material</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-                <form action=".../AgregarMaterial" method="POST">
+                <form action="../../AgregarMaterial" method="POST">
                     <div class="modal-body">
                         <div class="mb-3"><label class="form-label fw-bold text-muted small">NOMBRE DE LA PIEZA</label><input type="text" class="form-control" name="nombre_pieza" required></div>
                         <div class="mb-3"><label class="form-label fw-bold text-muted small">DESCRIPCIÓN</label><textarea class="form-control" name="descripcion" rows="2" required></textarea></div>
@@ -106,7 +106,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header"><h5 class="modal-title fw-bold">Editar Material</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-                <form action=".../EditarMaterial" method="POST">
+                <form action="../../EditarMaterial" method="POST">
                     <div class="modal-body">
                         <input type="hidden" name="id_material" id="edit_id_material_hidden">
                         <div class="mb-3"><label class="form-label fw-bold text-muted small">ID MATERIAL</label><input type="text" class="form-control bg-light" id="edit_id_material_display" readonly></div>

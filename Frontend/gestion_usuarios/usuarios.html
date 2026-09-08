@@ -43,7 +43,7 @@
     </div>
     <div class="modal fade" id="addModal" tabindex="-1">
         <div class="modal-dialog">
-            <form action=".../AgregarUsuario" method="POST" class="modal-content">
+            <form action="../../AgregarUsuario" method="POST" class="modal-content">
                 <div class="modal-header"><h5>Registrar Persona</h5></div>
                 <div class="modal-body">
                     <input type="text" name="matricula" class="form-control mb-3" placeholder="Matrícula" required>
@@ -60,7 +60,7 @@
     </div>
     <div class="modal fade" id="editModal" tabindex="-1">
         <div class="modal-dialog">
-            <form action=".../EditarUsuario" method="POST" class="modal-content">
+            <form action="../../EditarUsuario" method="POST" class="modal-content">
                 <div class="modal-header"><h5>Editar Datos</h5></div>
                 <div class="modal-body">
                     <input type="text" name="matricula" id="e_mat" class="form-control mb-3" readonly>
@@ -88,7 +88,7 @@
         }
         function confirmDel(m) {
             Swal.fire({title:'¿Eliminar?', text:'Esta acción no se puede deshacer', icon:'warning', showCancelButton:true}).then(r => {
-                if(r.isConfirmed) location.href='.../EliminarUsuario?matricula='+m;
+                if(r.isConfirmed) location.href='../../EliminarUsuario?matricula='+m;
             });
         }
     </script>
