@@ -2,13 +2,27 @@
 CREATE DATABASE IF NOT EXISTS sigas_db;
 USE sigas_db;
 
+-- =========================================================
+-- ELIMINACIÓN DE TABLAS EXISTENTES (Para poder reiniciar la BD)
+-- =========================================================
+DROP TABLE IF EXISTS REPORTE_FALLA;
+DROP TABLE IF EXISTS PRESTAMO;
+DROP TABLE IF EXISTS MATERIAL;
+DROP TABLE IF EXISTS EQUIPO;
+DROP TABLE IF EXISTS RACK_UBICACION;
+DROP TABLE IF EXISTS USUARIO;
+
+-- =========================================================
 -- 1. Tabla RACK_UBICACION
+-- =========================================================
 CREATE TABLE RACK_UBICACION (
     ID_Rack INT PRIMARY KEY AUTO_INCREMENT,
     Nombre_Ubicacion VARCHAR(100) NOT NULL
 );
 
+-- =========================================================
 -- 2. Tabla USUARIO
+-- =========================================================
 CREATE TABLE USUARIO (
     Matricula_ID VARCHAR(20) PRIMARY KEY,
     Nombre_Completo VARCHAR(150) NOT NULL,
@@ -18,7 +32,9 @@ CREATE TABLE USUARIO (
     Estatus VARCHAR(20) NOT NULL DEFAULT 'Activo'
 );
 
+-- =========================================================
 -- 3. Tabla EQUIPO
+-- =========================================================
 CREATE TABLE EQUIPO (
     ID_Equipo_QR VARCHAR(50) PRIMARY KEY,
     Num_Serie VARCHAR(100) NOT NULL UNIQUE,
@@ -27,10 +43,12 @@ CREATE TABLE EQUIPO (
     Estado VARCHAR(50) NOT NULL, -- (Disponible, En Mantenimiento, Prestado)
     Ultima_Auditoria DATE,
     ID_Rack INT,
-    FOREIGN KEY (ID_Rack) REFERENCES RACK_UBICACION(ID_Rack)
+    FOREIGN KEY (ID_Rack) REFERENCES RACK_UBICACION(ID_Rack) ON DELETE SET NULL
 );
 
+-- =========================================================
 -- 4. Tabla MATERIAL
+-- =========================================================
 CREATE TABLE MATERIAL (
     ID_Material INT PRIMARY KEY AUTO_INCREMENT,
     Nombre_Pieza VARCHAR(100) NOT NULL,
@@ -38,10 +56,12 @@ CREATE TABLE MATERIAL (
     Cantidad_Stock INT NOT NULL,
     Ultima_Auditoria DATE,
     ID_Rack INT,
-    FOREIGN KEY (ID_Rack) REFERENCES RACK_UBICACION(ID_Rack)
+    FOREIGN KEY (ID_Rack) REFERENCES RACK_UBICACION(ID_Rack) ON DELETE SET NULL
 );
 
+-- =========================================================
 -- 5. Tabla PRESTAMO
+-- =========================================================
 CREATE TABLE PRESTAMO (
     ID_Prestamo INT PRIMARY KEY AUTO_INCREMENT,
     Fecha_Salida DATE NOT NULL,
@@ -50,18 +70,28 @@ CREATE TABLE PRESTAMO (
     Estado_Prestamo VARCHAR(50) NOT NULL,
     Matricula_ID VARCHAR(20),
     ID_Equipo_QR VARCHAR(50),
-    FOREIGN KEY (Matricula_ID) REFERENCES USUARIO(Matricula_ID),
-    FOREIGN KEY (ID_Equipo_QR) REFERENCES EQUIPO(ID_Equipo_QR)
+    FOREIGN KEY (Matricula_ID) REFERENCES USUARIO(Matricula_ID) ON DELETE SET NULL,
+    FOREIGN KEY (ID_Equipo_QR) REFERENCES EQUIPO(ID_Equipo_QR) ON DELETE SET NULL
 );
 
+-- =========================================================
 -- 6. Tabla REPORTE_FALLA
+-- =========================================================
 CREATE TABLE REPORTE_FALLA (
     ID_Reporte INT PRIMARY KEY AUTO_INCREMENT,
     Descripcion_Dano TEXT NOT NULL,
     Fecha_Reporte DATE NOT NULL,
-    Estado_Resolucion VARCHAR(50) NOT NULL,
+    Estado_Resolucion VARCHAR(50) NOT NULL DEFAULT 'Pendiente',
     ID_Equipo_QR VARCHAR(50),
     ID_Prestamo INT,
-    FOREIGN KEY (ID_Equipo_QR) REFERENCES EQUIPO(ID_Equipo_QR),
-    FOREIGN KEY (ID_Prestamo) REFERENCES PRESTAMO(ID_Prestamo)
+    FOREIGN KEY (ID_Equipo_QR) REFERENCES EQUIPO(ID_Equipo_QR) ON DELETE CASCADE,
+    FOREIGN KEY (ID_Prestamo) REFERENCES PRESTAMO(ID_Prestamo) ON DELETE SET NULL
 );
+
+-- =========================================================
+-- INSERCIONES POR DEFECTO
+-- =========================================================
+-- Insertar un Usuario Administrador por defecto para que puedan iniciar sesión
+-- La contraseña original sin encriptar es "admin123" (Deben cambiar el sistema a Hashes reales en el futuro)
+INSERT INTO USUARIO (Matricula_ID, Nombre_Completo, Correo, Contrasena_Hash, Rol, Estatus) 
+VALUES ('ADMIN-001', 'Administrador Principal', 'admin@saltillo.tecnm.mx', 'admin123', 'Administrador', 'Activo');
