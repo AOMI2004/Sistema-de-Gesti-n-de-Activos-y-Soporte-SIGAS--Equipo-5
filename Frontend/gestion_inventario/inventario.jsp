@@ -37,7 +37,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2 p-0">
-                <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script src="../assets/js/sidebar.js"></script>
+                <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script>const userRole = "<%= session.getAttribute("rol") != null ? session.getAttribute("rol") : "" %>";</script>
+<script src="../assets/js/sidebar.js"></script>
             </div>
             <div class="col-md-10 main-content">
                 <h2 class="fw-bold mb-4">Inventario de Equipos Principales</h2>

@@ -12,7 +12,8 @@
 <body style="overflow-y: scroll; background-color: #f8fafc;">
     <div class="container-fluid p-0">
         <div class="d-flex">
-                        <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script src="../assets/js/sidebar.js"></script>
+                        <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script>const userRole = "<%= session.getAttribute("rol") != null ? session.getAttribute("rol") : "" %>";</script>
+<script src="../assets/js/sidebar.js"></script>
             <div class="main-content flex-grow-1 p-4 text-center">
                 <h2 class="fw-bold mb-1">Auditoría de Inventario mediante QR</h2>
                 <p class="text-muted mb-4">Simula el escaneo del código para verificar su presencia física en el laboratorio.</p>
