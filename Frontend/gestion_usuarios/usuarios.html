@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,13 +11,11 @@
 <body>
     <div class="d-flex">
                     <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script src="../assets/js/sidebar.js"></script>
-
         <div class="main-content flex-grow-1">
             <div class="d-flex justify-content-between mb-4">
                 <h2>Directorio de Usuarios</h2>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Nuevo Registro</button>
             </div>
-
             <div class="card-table">
                 <table class="table table-hover">
                     <thead>
@@ -36,26 +32,24 @@
                                 while(rs.next()){
                         %>
                         <tr>
-                            <td><%= rs.getString("Matricula_ID") %></td>
-                            <td><%= rs.getString("Nombre_Completo") %></td>
-                            <td><%= rs.getString("Correo") %></td>
-                            <td><%= rs.getString("Rol") %></td>
-                            <td><span class="badge <%= rs.getString("Estatus").equals("Activo") ? "bg-success" : "bg-danger" %>"><%= rs.getString("Estatus") %></span></td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td><span class="badge ...">...</span></td>
                             <td>
-                                <a href="#" onclick="editUser('<%= rs.getString("Matricula_ID") %>', '<%= rs.getString("Nombre_Completo") %>', '<%= rs.getString("Correo") %>', '<%= rs.getString("Rol") %>', '<%= rs.getString("Estatus") %>')"><i class="bi bi-pencil me-2"></i></a>
-                                <a href="#" class="text-danger" onclick="confirmDel('<%= rs.getString("Matricula_ID") %>')"><i class="bi bi-trash"></i></a>
+                                <a href="#" onclick="editUser('...', '...', '...', '...', '...')"><i class="bi bi-pencil me-2"></i></a>
+                                <a href="#" class="text-danger" onclick="confirmDel('...')"><i class="bi bi-trash"></i></a>
                             </td>
                         </tr>
-                        <% } conn.close(); } catch(Exception e){} %>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="addModal" tabindex="-1">
         <div class="modal-dialog">
-            <form action="<%= request.getContextPath() %>/AgregarUsuario" method="POST" class="modal-content">
+            <form action=".../AgregarUsuario" method="POST" class="modal-content">
                 <div class="modal-header"><h5>Registrar Persona</h5></div>
                 <div class="modal-body">
                     <input type="text" name="matricula" class="form-control mb-3" placeholder="Matrícula" required>
@@ -70,10 +64,9 @@
             </form>
         </div>
     </div>
-
     <div class="modal fade" id="editModal" tabindex="-1">
         <div class="modal-dialog">
-            <form action="<%= request.getContextPath() %>/EditarUsuario" method="POST" class="modal-content">
+            <form action=".../EditarUsuario" method="POST" class="modal-content">
                 <div class="modal-header"><h5>Editar Datos</h5></div>
                 <div class="modal-body">
                     <input type="text" name="matricula" id="e_mat" class="form-control mb-3" readonly>
@@ -90,7 +83,6 @@
             </form>
         </div>
     </div>
-
     <script>
         function editUser(m, n, c, r, e) {
             document.getElementById('e_mat').value = m;
@@ -102,7 +94,7 @@
         }
         function confirmDel(m) {
             Swal.fire({title:'¿Eliminar?', text:'Esta acción no se puede deshacer', icon:'warning', showCancelButton:true}).then(r => {
-                if(r.isConfirmed) location.href='<%= request.getContextPath() %>/EliminarUsuario?matricula='+m;
+                if(r.isConfirmed) location.href='.../EliminarUsuario?matricula='+m;
             });
         }
     </script>

@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <style>
         body { background-color: #f8f9fa; font-family: Arial, sans-serif; overflow-x: hidden; }
         .sidebar { background-color: #0d1b2a; color: white; min-height: 100vh; padding-top: 20px; }
@@ -34,31 +31,20 @@
             <div class="col-md-2 p-0">
                 <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script src="../assets/js/sidebar.js"></script>
             </div>
-
             <div class="col-md-10 main-content">
                 <h2 class="fw-bold mb-4">Inventario de Equipos Principales</h2>
-
-                <% if(request.getParameter("registro") != null) { %>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>¡Éxito!</strong> El equipo se ha registrado correctamente.
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
-                <% } %>
-                
-                <% if(request.getParameter("eliminacion") != null) { %>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>¡Eliminado!</strong> El equipo se ha borrado correctamente del sistema.
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
-                <% } %>
-
-                <% if(request.getParameter("edicion") != null) { %>
                     <div class="alert alert-primary alert-dismissible fade show" role="alert">
                         <strong>¡Actualizado!</strong> Los datos del equipo se guardaron correctamente.
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
-                <% } %>
-
                 <div class="card-table">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="input-group" style="width: 350px;">
@@ -69,7 +55,6 @@
                             <i class="bi bi-plus-lg"></i> Agregar Equipo Nuevo
                         </button>
                     </div>
-
                     <table class="table table-hover align-middle">
                         <thead>
                             <tr>
@@ -85,23 +70,19 @@
                                 String dbURL = "jdbc:mysql://localhost:3306/sigas_db";
                                 String dbUser = "root";
                                 String dbPass = "SIGAS123";
-                                
                                 try {
                                     Class.forName("com.mysql.cj.jdbc.Driver");
                                     Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
                                     Statement stmt = conn.createStatement();
                                     ResultSet rs = stmt.executeQuery("SELECT * FROM EQUIPO");
-                                    
                                     while(rs.next()) {
                                         String idQr = rs.getString("ID_Equipo_QR");
                                         String marca = rs.getString("Marca");
                                         String modelo = rs.getString("Modelo");
                                         String numSerie = rs.getString("Num_Serie");
                                         String estado = rs.getString("Estado");
-                                        
                                         String badgeClass = "bg-success text-success border-success";
                                         String iconClass = "bi-check-circle";
-                                        
                                         if("En Mantenimiento".equals(estado)) {
                                             badgeClass = "bg-danger text-danger border-danger";
                                             iconClass = "bi-wrench";
@@ -111,16 +92,15 @@
                                         }
                             %>
                             <tr>
-                                <td class="fw-bold"><%= idQr %></td>
-                                <td><%= marca %> / <%= modelo %></td>
-                                <td class="text-muted"><%= numSerie %></td>
-                                <td><span class="badge <%= badgeClass %> bg-opacity-10 border rounded-pill px-3 py-2"><i class="bi <%= iconClass %>"></i> <%= estado %></span></td>
+                                <td class="fw-bold">...</td>
+                                <td>... / ...</td>
+                                <td class="text-muted">...</td>
+                                <td><span class="badge ... bg-opacity-10 border rounded-pill px-3 py-2"><i class="bi ..."></i> ...</span></td>
                                 <td>
-                                    <a href="#" class="icon-action icon-edit" onclick="abrirModalEditar('<%= idQr %>', '<%= marca %>', '<%= modelo %>', '<%= numSerie %>', '<%= estado %>')">
+                                    <a href="#" class="icon-action icon-edit" onclick="abrirModalEditar('...', '...', '...', '...', '...')">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    
-                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '<%= request.getContextPath() %>/EliminarEquipo?id_qr=<%= idQr %>')">
+                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '.../EliminarEquipo?id_qr=...')">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>
@@ -138,7 +118,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="modalAgregarEquipo" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -171,7 +150,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="modalEditarEquipo" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -182,7 +160,6 @@
                 <form action="../../EditarEquipo" method="POST">
                     <div class="modal-body">
                         <input type="hidden" name="id_qr" id="edit_id_qr_hidden">
-                        
                         <div class="mb-3">
                             <label class="form-label fw-bold text-muted small">ID QR (No editable)</label>
                             <input type="text" class="form-control bg-light" id="edit_id_qr_display" readonly>
@@ -218,9 +195,7 @@
             </div>
         </div>
     </div>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script>
         // Función para confirmar la eliminación (SweetAlert)
         function confirmarEliminacion(event, url) {
@@ -241,7 +216,6 @@
                 }
             })
         }
-
         // Función para abrir el modal de Edición y rellenarlo con los datos
         function abrirModalEditar(id, marca, modelo, serie, estado) {
             document.getElementById('edit_id_qr_hidden').value = id;
@@ -250,7 +224,6 @@
             document.getElementById('edit_modelo').value = modelo;
             document.getElementById('edit_numero_serie').value = serie;
             document.getElementById('edit_estado').value = estado;
-            
             var modalEdit = new bootstrap.Modal(document.getElementById('modalEditarEquipo'));
             modalEdit.show();
         }

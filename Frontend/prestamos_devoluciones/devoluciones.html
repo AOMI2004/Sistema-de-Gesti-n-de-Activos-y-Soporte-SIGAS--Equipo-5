@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIGAS - Préstamos y Devoluciones</title>
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="devoluciones.css">
@@ -16,7 +13,6 @@
     <div class="container-fluid p-0">
         <div class="d-flex">
                         <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script src="../assets/js/sidebar.js"></script>
-
             <div class="main-content flex-grow-1 p-4 bg-light">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
@@ -27,18 +23,15 @@
                         <i class="bi bi-plus-lg me-2"></i>Nuevo Préstamo
                     </button>
                 </div>
-
-                <% if(request.getParameter("registro") != null) { %><div class="alert alert-success fw-bold"><i class="bi bi-check-circle me-2"></i>Préstamo autorizado.</div><% } %>
-                <% if(request.getParameter("devolucion") != null) { %><div class="alert alert-primary fw-bold"><i class="bi bi-info-circle me-2"></i>Equipo devuelto correctamente.</div><% } %>
-                <% if(request.getParameter("reporte") != null) { %><div class="alert alert-danger fw-bold"><i class="bi bi-tools me-2"></i>Equipo enviado a mantenimiento.</div><% } %>
-
+                <div class="alert alert-success fw-bold"><i class="bi bi-check-circle me-2"></i>Préstamo autorizado.</div>
+                <div class="alert alert-primary fw-bold"><i class="bi bi-info-circle me-2"></i>Equipo devuelto correctamente.</div>
+                <div class="alert alert-danger fw-bold"><i class="bi bi-tools me-2"></i>Equipo enviado a mantenimiento.</div>
                 <div class="card border-0 shadow-sm p-4 mx-auto mb-4">
                     <form action="devoluciones.jsp" method="GET" class="input-group">
                         <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
                         <input type="text" name="buscar_qr" class="form-control border-start-0 py-2" placeholder="Escanea el QR del equipo para devolverlo rápido" required>
                         <button type="submit" class="btn btn-dark px-4 fw-bold">Buscar</button>
                     </form>
-
                     <%
                         String qrBusqueda = request.getParameter("buscar_qr");
                         if(qrBusqueda != null && !qrBusqueda.trim().isEmpty()) {
@@ -51,7 +44,6 @@
                                 PreparedStatement ps = conn.prepareStatement(sql);
                                 ps.setString(1, qrBusqueda);
                                 ResultSet rs = ps.executeQuery();
-                                
                                 if(rs.next()) {
                                     encontrado = true;
                                     int idPrestamoActivo = rs.getInt("ID_Prestamo");
@@ -61,14 +53,13 @@
                                         <div class="d-flex align-items-center justify-content-center bg-white border border-success rounded-4 p-3 shadow-sm mx-auto" style="max-width: 500px;">
                                             <i class="bi bi-person-badge fs-1 text-secondary me-3"></i>
                                             <div class="text-start">
-                                                <p class="mb-0 fw-bold"><%= rs.getString("Rol") %>: <%= rs.getString("Nombre_Completo") %></p>
-                                                <p class="mb-0 text-muted small">Equipo: <%= rs.getString("Modelo") %> (QR: <%= qrBusqueda %>)</p>
+                                                <p class="mb-0 fw-bold">...: ...</p>
+                                                <p class="mb-0 text-muted small">Equipo: ... (QR: ...)</p>
                                             </div>
                                         </div>
-                                        
                                         <div class="row g-3 mt-3 mx-auto" style="max-width: 500px;">
                                             <div class="col-md-6">
-                                                <a href="<%= request.getContextPath() %>/DevolverEquipo?id_prestamo=<%= idPrestamoActivo %>&id_equipo=<%= qrBusqueda %>" class="btn btn-success w-100 py-3 fw-bold rounded-3">
+                                                <a href=".../DevolverEquipo?id_prestamo=...&id_equipo=..." class="btn btn-success w-100 py-3 fw-bold rounded-3">
                                                     <i class="bi bi-check2-circle me-2"></i> Devolver Bien
                                                 </a>
                                             </div>
@@ -79,21 +70,18 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="modal fade" id="modalFalla" tabindex="-1">
                                         <div class="modal-dialog modal-dialog-centered">
-                                            <form action="<%= request.getContextPath() %>/ReportarFalla" method="POST" class="modal-content border-0 shadow">
+                                            <form action=".../ReportarFalla" method="POST" class="modal-content border-0 shadow">
                                                 <div class="modal-header bg-light border-0">
                                                     <h5 class="modal-title fw-bold">Reportar Daño o Falla</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                 </div>
                                                 <div class="modal-body p-4 text-start">
-                                                    <input type="hidden" name="id_equipo" value="<%= qrBusqueda %>">
-                                                    <input type="hidden" name="id_prestamo" value="<%= idPrestamoActivo %>">
-                                                    
+                                                    <input type="hidden" name="id_equipo" value="...">
+                                                    <input type="hidden" name="id_prestamo" value="...">
                                                     <label class="form-label small fw-bold text-muted">Describa el problema del equipo:</label>
                                                     <textarea name="descripcion" class="form-control bg-light border-0 mb-4" rows="4" placeholder="Ej. El lente está rayado..." required></textarea>
-                                                    
                                                     <button type="submit" class="btn btn-primary w-100 py-2 fw-bold" style="background-color: #0b5361; border: none;">
                                                         Confirmar Falla y Enviar a Mantenimiento
                                                     </button>
@@ -108,14 +96,13 @@
                             if(!encontrado) {
                     %>
                                 <div class="alert alert-warning text-center fw-bold mt-4 mb-0">
-                                    <i class="bi bi-exclamation-triangle-fill me-2"></i> No se encontró préstamo activo para: <%= qrBusqueda %>
+                                    <i class="bi bi-exclamation-triangle-fill me-2"></i> No se encontró préstamo activo para: ...
                                 </div>
                     <%
                             }
                         }
                     %>
                 </div>
-
                 <div class="card border-0 shadow-sm p-4">
                     <h5 class="fw-bold mb-4"><i class="bi bi-list-task me-2"></i>Historial General</h5>
                     <div class="table-responsive">
@@ -135,36 +122,30 @@
                                             boolean activo = rsT.getString("Estado_Prestamo").equals("Activo");
                                 %>
                                 <tr>
-                                    <td class="fw-bold text-primary">#<%= rsT.getInt("ID_Prestamo") %></td>
-                                    <td><%= rsT.getString("Nombre_Completo") %></td>
-                                    <td><span class="badge bg-secondary"><i class="bi bi-qr-code"></i> <%= rsT.getString("ID_Equipo_QR") %></span></td>
-                                    <td><%= rsT.getDate("Fecha_Salida") %></td>
+                                    <td class="fw-bold text-primary">#...</td>
+                                    <td>...</td>
+                                    <td><span class="badge bg-secondary"><i class="bi bi-qr-code"></i> ...</span></td>
+                                    <td>...</td>
                                     <td>
-                                        <% if(activo) { %><span class="badge bg-warning text-dark px-3">En Préstamo</span>
-                                        <% } else if(rsT.getString("Estado_Prestamo").contains("Falla")) { %><span class="badge bg-danger px-3">Falla</span>
-                                        <% } else { %><span class="badge bg-success px-3">Devuelto</span><% } %>
+                                        <span class="badge bg-warning text-dark px-3">En Préstamo</span>
+                                        <span class="badge bg-danger px-3">Falla</span>
+                                        <span class="badge bg-success px-3">Devuelto</span>
                                     </td>
                                     <td>
-                                        <% if(activo) { %>
-                                            <a href="#" onclick="confirmarDevolucion('<%= request.getContextPath() %>/DevolverEquipo?id_prestamo=<%= rsT.getInt("ID_Prestamo") %>&id_equipo=<%= rsT.getString("ID_Equipo_QR") %>')" class="btn btn-sm btn-outline-success fw-bold">Devolver Bien</a>
-                                        <% } else { %>
+                                            <a href="#" onclick="confirmarDevolucion('.../DevolverEquipo?id_prestamo=...&id_equipo=...')" class="btn btn-sm btn-outline-success fw-bold">Devolver Bien</a>
                                             <span class="text-muted small"><i class="bi bi-check2-all"></i> Cerrado</span>
-                                        <% } %>
                                     </td>
                                 </tr>
-                                <% } rsT.close(); stmt.close(); conn.close(); } catch(Exception e){} %>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="modalPrestamo" tabindex="-1">
         <div class="modal-dialog">
-            <form action="<%= request.getContextPath() %>/NuevoPrestamo" method="POST" class="modal-content">
+            <form action=".../NuevoPrestamo" method="POST" class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title fw-bold">Registrar Salida de Equipo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -209,7 +190,6 @@
             </form>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function confirmarDevolucion(url) {
