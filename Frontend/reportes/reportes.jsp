@@ -15,7 +15,7 @@
 <body>
     <div class="container-fluid p-0">
         <div class="d-flex">
-                        <jsp:include page="../components/sidebar.jsp" />
+                        <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script src="../assets/js/sidebar.js"></script>
 
             <div class="main-content flex-grow-1 p-4 bg-light">
                 <header class="d-flex justify-content-between align-items-center mb-4">

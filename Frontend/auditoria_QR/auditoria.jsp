@@ -14,7 +14,7 @@
 <body style="overflow-y: scroll; background-color: #f8fafc;">
     <div class="container-fluid p-0">
         <div class="d-flex">
-                        <jsp:include page="../components/sidebar.jsp" />
+                        <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script src="../assets/js/sidebar.js"></script>
 
             <div class="main-content flex-grow-1 p-4 text-center">
                 <h2 class="fw-bold mb-1">Auditoría de Inventario mediante QR</h2>

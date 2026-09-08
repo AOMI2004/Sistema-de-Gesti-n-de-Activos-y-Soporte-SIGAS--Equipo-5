@@ -32,7 +32,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2 p-0">
-                <jsp:include page="../components/sidebar.jsp" />
+                <div id="sidebar-container" class="col-md-2 p-0" style="min-width: 280px; max-width: 280px;"></div><script src="../assets/js/sidebar.js"></script>
             </div>
 
             <div class="col-md-10 main-content">

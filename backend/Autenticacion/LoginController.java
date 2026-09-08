@@ -64,7 +64,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("rol", rolUsuario);
                 
                 // Redirigir al dashboard con la ruta correcta
-                response.sendRedirect(contextPath + "/Frontend/dashboard_administrador/dashboard.jsp");
+                response.sendRedirect(contextPath + "/Frontend/dashboard_administrador/dashboard.html");
             } else {
                 // No lo encontró, credenciales inválidas
                 response.sendRedirect(contextPath + "/Frontend/pantalla_login/login.html?error=credenciales_invalidas");
