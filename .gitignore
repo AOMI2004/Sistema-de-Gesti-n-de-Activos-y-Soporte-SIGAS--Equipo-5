@@ -1,0 +1,37 @@
+# Archivos compilados de Java
+*.class
+WEB-INF/classes/
+
+# Directorios de compilación y salida
+bin/
+build/
+target/
+out/
+
+# Archivos de bitácora (logs)
+*.log
+
+# Archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Configuraciones de IDEs (Eclipse, IntelliJ, VS Code)
+# Nota: No ignoramos la carpeta .vscode/ por defecto por si quieren compartir 'settings.json'
+# pero ignoramos las carpetas de proyectos de Eclipse e IntelliJ.
+.idea/
+*.iml
+*.iws
+.project
+.classpath
+.settings/
+
+# Archivos temporales de servidores (como Tomcat)
+work/
+temp/
+logs/
+
+# NOTA IMPORTANTE PARA EL EQUIPO:
+# NO estamos ignorando 'WEB-INF/lib/*.jar' porque actualmente no usan Maven/Gradle.
+# Sus compañeros necesitarán descargar el conector de MySQL que está ahí para que el proyecto funcione.
