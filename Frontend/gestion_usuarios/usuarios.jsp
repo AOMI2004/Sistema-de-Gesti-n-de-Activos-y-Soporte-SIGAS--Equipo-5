@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="backend.DAO.UsuarioDAO" %>
 <%@ page import="backend.Modelos.Usuario" %>
@@ -10,7 +10,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>SIGAS - Gestión de Usuarios</title>
+    <title>SIGAS - GestiÃ³n de Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="usuarios.css">
@@ -29,7 +29,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Matrícula</th><th>Nombre</th><th>Correo</th><th>Rol</th><th>Estatus</th><th>Acciones</th>
+                            <th>MatrÃ­cula</th><th>Nombre</th><th>Correo</th><th>Rol</th><th>Estatus</th><th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,7 +66,7 @@
             <form action="../../AgregarUsuario" method="POST" class="modal-content">
                 <div class="modal-header"><h5>Registrar Persona</h5></div>
                 <div class="modal-body">
-                    <input type="text" name="matricula" class="form-control mb-3" placeholder="Matrícula" required>
+                    <input type="text" name="matricula" class="form-control mb-3" placeholder="MatrÃ­cula" required>
                     <input type="text" name="nombre" class="form-control mb-3" placeholder="Nombre Completo" required>
                     <input type="email" name="correo" class="form-control mb-3" placeholder="Correo Institucional" required>
                     <select name="rol" class="form-select">
@@ -103,11 +103,11 @@
             document.getElementById('e_nom').value = n;
             document.getElementById('e_cor').value = c;
             document.getElementById('e_rol').value = r;
-            document.getElementById('e_está).value = e;
+            document.getElementById('e_estÃ¡).value = e;
             new bootstrap.Modal(document.getElementById('editModal')).show();
         }
         function confirmDel(m) {
-            Swal.fire({title:'¿Eliminar?', text:'Esta acción no se puede deshacer', icon:'warning', showCancelButton:true}).then(r => {
+            Swal.fire({title:'Â¿Eliminar?', text:'Esta acciÃ³n no se puede deshacer', icon:'warning', showCancelButton:true}).then(r => {
                 if(r.isConfirmed) location.href='../../EliminarUsuario?matricula='+m;
             });
         }
@@ -119,22 +119,22 @@
         document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('registro') && urlParams.get('registro') === 'exito') {
-                Swal.fire('¡Éxito!', 'Registro creado correctamente.', 'success');
+                Swal.fire('Â¡Ã‰xito!', 'Registro creado correctamente.', 'success');
             } else if (urlParams.has('eliminacion') && urlParams.get('eliminacion') === 'exito') {
-                Swal.fire('¡Eliminado!', 'Registro borrado correctamente.', 'success');
+                Swal.fire('Â¡Eliminado!', 'Registro borrado correctamente.', 'success');
             } else if (urlParams.has('edicion') && urlParams.get('edicion') === 'exito') {
-                Swal.fire('¡Actualizado!', 'Datos guardados correctamente.', 'success');
+                Swal.fire('Â¡Actualizado!', 'Datos guardados correctamente.', 'success');
             } else if (urlParams.has('prestamo') && urlParams.get('prestamo') === 'exito') {
-                Swal.fire('¡Autorizado!', 'Préstamo registrado.', 'success');
+                Swal.fire('Â¡Autorizado!', 'PrÃ©stamo registrado.', 'success');
             } else if (urlParams.has('devolucion') && urlParams.get('devolucion') === 'exito') {
-                Swal.fire('¡Devuelto!', 'Equipo devuelto correctamente.', 'success');
+                Swal.fire('Â¡Devuelto!', 'Equipo devuelto correctamente.', 'success');
             } else if (urlParams.has('reporte') && urlParams.get('reporte') === 'exito') {
-                Swal.fire('¡Reportado!', 'Falla enviada a mantenimiento.', 'success');
+                Swal.fire('Â¡Reportado!', 'Falla enviada a mantenimiento.', 'success');
             } else if (urlParams.has('error')) {
                 const error = urlParams.get('error');
-                let mensaje = 'Ocurrió un error inesperado.';
+                let mensaje = 'OcurriÃ³ un error inesperado.';
                 if (error === 'foranea') mensaje = 'No se puede eliminar porque tiene registros asociados.';
-                else if (error === 'bd') mensaje = 'Error de conexión con la base de datos.';
+                else if (error === 'bd') mensaje = 'Error de conexiÃ³n con la base de datos.';
                 Swal.fire('Error', mensaje, 'error');
             }
             
@@ -147,13 +147,13 @@
         function confirmarEliminacion(event, url) {
             event.preventDefault(); 
             Swal.fire({
-                title: '¿Estás seguro?',
-                text: 'Se eliminará el usuario del sistema.',
+                title: 'Â¿EstÃ¡s seguro?',
+                text: 'Se eliminarÃ¡ el usuario del sistema.',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#0d1b2a',
-                confirmButtonText: 'Sí, confirmar',
+                confirmButtonText: 'SÃ­, confirmar',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -169,7 +169,7 @@
             document.getElementById('edit_correo').value = correo;
             document.getElementById('edit_rol').value = rol;
             document.getElementById('edit_estatus').value = estatus;
-            new bootstrap.Modal(document.getElementById('modalEditarUsuario')).show();
+            new bootstrap.Modal(document.getElementById('editModal')).show();
         }
 </script></body>
 
