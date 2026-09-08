@@ -20,7 +20,7 @@ public class ReportarFallaController extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigas_db", "root", "SIGAS123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:4463/sigas_db", "root", "aster");
             
             // 1. Insertar el reporte de falla en tu tabla REPORTE_FALLA
             String sqlFalla = "INSERT INTO REPORTE_FALLA (Descripcion_Dano, Fecha_Reporte, Estado_Resolucion, ID_Equipo_QR, ID_Prestamo) VALUES (?, CURRENT_DATE, 'Pendiente', ?, ?)";

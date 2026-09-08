@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 public class EliminarMaterialController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id_material = Integer.parseInt(request.getParameter("id_material"));
-        String url = "jdbc:mysql://localhost:3306/sigas_db";
+        String url = "jdbc:mysql://localhost:4463/sigas_db";
         String usuario = "root";
-        String password = "SIGAS123";
+        String password = "aster";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

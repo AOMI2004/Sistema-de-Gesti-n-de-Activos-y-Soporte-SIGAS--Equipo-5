@@ -24,9 +24,9 @@ public class EditarEquipoController extends HttpServlet {
         String numero_serie = request.getParameter("numero_serie");
         String estado = request.getParameter("estado");
 
-        String url = "jdbc:mysql://localhost:3306/sigas_db";
+        String url = "jdbc:mysql://localhost:4463/sigas_db";
         String usuario = "root";
-        String password = "SIGAS123";
+        String password = "aster";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

@@ -20,7 +20,7 @@ public class NuevoPrestamoController extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sigas_db", "root", "SIGAS123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:4463/sigas_db", "root", "aster");
             
             // 1. Insertar el préstamo (Fecha Salida es HOY automático)
             String sqlPrestamo = "INSERT INTO PRESTAMO (Fecha_Salida, Fecha_Limite, Estado_Prestamo, Matricula_ID, ID_Equipo_QR) VALUES (CURRENT_DATE, ?, 'Activo', ?, ?)";

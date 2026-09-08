@@ -21,9 +21,9 @@ public class AgregarUsuarioController extends HttpServlet {
         // Contraseña genérica para cumplir con el NOT NULL de la BD
         String passGen = "12345"; 
 
-        String url = "jdbc:mysql://localhost:3306/sigas_db";
+        String url = "jdbc:mysql://localhost:4463/sigas_db";
         String usuarioBD = "root";
-        String passwordBD = "SIGAS123";
+        String passwordBD = "aster";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

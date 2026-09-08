@@ -24,9 +24,9 @@ public class EquipoController extends HttpServlet {
         String estado = request.getParameter("estado");
         
         // 2. Conectarse a MySQL
-        String dbURL = "jdbc:mysql://localhost:3306/sigas_db";
+        String dbURL = "jdbc:mysql://localhost:4463/sigas_db";
         String dbUser = "root";
-        String dbPass = "SIGAS123"; 
+        String dbPass = "aster"; 
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

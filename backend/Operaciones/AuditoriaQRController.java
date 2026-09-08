@@ -16,9 +16,9 @@ public class AuditoriaQRController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String id_qr = request.getParameter("id_qr");
 
-        String url = "jdbc:mysql://localhost:3306/sigas_db";
+        String url = "jdbc:mysql://localhost:4463/sigas_db";
         String usuario = "root";
-        String password = "SIGAS123";
+        String password = "aster";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
