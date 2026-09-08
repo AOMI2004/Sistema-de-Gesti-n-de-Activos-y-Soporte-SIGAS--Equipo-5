@@ -15,30 +15,7 @@
 <body>
     <div class="container-fluid p-0">
         <div class="d-flex">
-            <div class="sidebar d-flex flex-column p-0">
-                <h4 class="text-center mb-4 text-white fw-bold mt-3">
-                    <i class="bi bi-layers"></i> Admin Panel
-                </h4>
-                
-                <a href="../dashboard_administrador/dashboard.html"><i class="bi bi-grid-1x2"></i> Inicio</a>
-                
-                <div class="nav-label">INFRAESTRUCTURA</div>
-                <a href="../mapa_rack/racks.jsp" class="active"><i class="bi bi-hdd-rack"></i> Gestión de Racks</a>
-                <a href="../gestion_inventario/inventario.jsp"><i class="bi bi-pc-display"></i> Catálogo de Equipos</a>
-                <a href="../gestion_inventario/materiales.jsp"><i class="bi bi-box-seam"></i> Catálogo de Materiales</a>
-                
-                <div class="nav-label">OPERACIONES</div>
-                <a href="../auditoria_QR/auditoria.html"><i class="bi bi-qr-code-scan"></i> Auditoría QR</a>
-                <a href="../prestamos_devoluciones/devoluciones.html"><i class="bi bi-arrow-left-right"></i> Préstamos y Devoluciones</a>
-                <a href="../reportes/reportes.html"><i class="bi bi-file-earmark-medical"></i> Reportes</a>
-                
-                <div class="nav-label">SISTEMA</div>
-                <a href="../gestion_usuarios/usuarios.jsp"><i class="bi bi-people"></i> Usuarios</a>
-                
-                <div class="mt-auto mb-4">
-                    <a href="<%= request.getContextPath() %>/Logout"><i class="bi bi-box-arrow-left"></i> Cerrar Sesión</a>
-                </div>
-            </div>
+                        <jsp:include page="../components/sidebar.jsp" />
 
             <div class="main-content flex-grow-1 p-4 bg-light">
                 <header class="d-flex justify-content-between align-items-center mb-4">

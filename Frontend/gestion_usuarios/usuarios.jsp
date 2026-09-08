@@ -12,17 +12,7 @@
 </head>
 <body>
     <div class="d-flex">
-        <div class="sidebar">
-            <h4 class="text-center text-white py-4">Admin Panel</h4>
-            <a href="../dashboard_administrador/dashboard.html"><i class="bi bi-grid-1x2"></i> Inicio</a>
-            <div class="nav-label">INFRAESTRUCTURA</div>
-            <a href="../mapa_rack/racks.jsp"><i class="bi bi-hdd-rack"></i> Gestión de Racks</a>
-            <a href="../gestion_inventario/inventario.jsp"><i class="bi bi-pc-display"></i> Catálogo de Equipos</a>
-            <a href="../gestion_inventario/materiales.jsp"><i class="bi bi-box-seam"></i> Catálogo de Materiales</a>
-            <div class="nav-label">SISTEMA</div>
-            <a href="usuarios.jsp" class="active"><i class="bi bi-people"></i> Usuarios</a>
-            <div class="mt-auto p-4"><a href="<%= request.getContextPath() %>/Logout" class="text-muted"><i class="bi bi-box-arrow-left"></i> Salir</a></div>
-        </div>
+                    <jsp:include page="../components/sidebar.jsp" />
 
         <div class="main-content flex-grow-1">
             <div class="d-flex justify-content-between mb-4">
