@@ -44,10 +44,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Set active link
         const currentPath = window.location.pathname;
+        const currentFileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+        
         const links = container.querySelectorAll("a");
         links.forEach(link => {
             const pageId = link.getAttribute("data-page");
-            if (pageId && currentPath.includes(pageId)) {
+            if (pageId && currentFileName.includes(pageId)) {
                 link.classList.add("active");
             }
         });
