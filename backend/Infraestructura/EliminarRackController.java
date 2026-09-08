@@ -19,14 +19,14 @@ public class EliminarRackController extends HttpServlet {
         try {
             boolean exito = rackDAO.eliminarRack(id_rack);
             if (exito) {
-                response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.html?eliminacion=exito");
+                response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.jsp?eliminacion=exito");
             } else {
-                response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.html?error=noencontrado");
+                response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.jsp?error=noencontrado");
             }
         } catch (SQLException e) {
             // Si el rack tiene equipos o materiales asignados, MySQL bloqueará la eliminación por seguridad (Llave Foránea)
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.html?error=foranea");
+            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.jsp?error=foranea");
         }
     }
 }

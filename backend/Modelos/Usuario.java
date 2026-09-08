@@ -1,3 +1,5 @@
+package Backend.Modelos;
+
 public class Usuario {
     private String matriculaId;
     private String nombreCompleto;

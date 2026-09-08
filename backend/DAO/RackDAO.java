@@ -40,6 +40,25 @@ public class RackDAO {
         }
     }
 
+    public java.util.List<Rack> obtenerRacks() {
+        java.util.List<Rack> lista = new java.util.ArrayList<>();
+        String sql = "SELECT ID_Rack, Nombre_Ubicacion FROM RACK_UBICACION";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             java.sql.ResultSet rs = ps.executeQuery()) {
+            
+            while(rs.next()) {
+                Rack rack = new Rack();
+                rack.setIdRack(rs.getInt("ID_Rack"));
+                rack.setNombreUbicacion(rs.getString("Nombre_Ubicacion"));
+                lista.add(rack);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
     public boolean eliminarRack(int idRack) throws SQLException {
         String sql = "DELETE FROM RACK_UBICACION WHERE ID_Rack = ?";
         // No capturamos la excepción aquí para que el controlador sepa si falló 

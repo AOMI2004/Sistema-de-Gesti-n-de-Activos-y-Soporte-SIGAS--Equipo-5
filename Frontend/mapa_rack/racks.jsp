@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="Backend.Modelos.Rack" %>
+<%@ page import="Backend.DAO.RackDAO" %>
+<%
+    RackDAO rackDAO = new RackDAO();
+    List<Rack> listaRacks = rackDAO.obtenerRacks();
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,7 +33,7 @@
                 </header>
 
                 <div class="row g-4 mb-5">
-                    
+                    <% for(Rack rack : listaRacks) { %>
                     <div class="col-md-4">
                         <div class="card border-0 shadow-sm p-4 rack-card">
                             <div class="d-flex justify-content-between align-items-start">
@@ -34,18 +42,18 @@
                                         <i class="bi bi-hdd-stack fs-4"></i>
                                     </div>
                                     <div>
-                                        <h5 class="fw-bold mb-0">RACK-...</h5>
-                                        <small class="text-muted">...</small>
+                                        <h5 class="fw-bold mb-0"><%= rack.getNombreUbicacion() %></h5>
+                                        <small class="text-muted">ID: <%= rack.getIdRack() %></small>
                                     </div>
                                 </div>
                                 <div class="d-flex gap-2">
-                                    <a href="#" class="text-primary" onclick="abrirModalEditar('...', '...')"><i class="bi bi-pencil fs-5"></i></a>
-                                    <a href="#" class="text-danger" onclick="confirmarEliminacion(event, '../../EliminarRack?id_rack=...')"><i class="bi bi-trash fs-5"></i></a>
+                                    <a href="#" class="text-primary" onclick="abrirModalEditar('<%= rack.getIdRack() %>', '<%= rack.getNombreUbicacion().replace("'", "\\'") %>')"><i class="bi bi-pencil fs-5"></i></a>
+                                    <a href="#" class="text-danger" onclick="confirmarEliminacion(event, '../../EliminarRack?id_rack=<%= rack.getIdRack() %>')"><i class="bi bi-trash fs-5"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+                    <% } %>
                 </div>
                 <div class="card border-0 shadow-sm p-4 mt-4 bg-white">
                     <h5 class="fw-bold mb-4 text-secondary"><i class="bi bi-search me-2"></i>Vista Docente: Disponibilidad</h5>

@@ -24,9 +24,9 @@ public class EditarRackController extends HttpServlet {
         boolean exito = rackDAO.editarRack(rack);
 
         if (exito) {
-            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.html?edicion=exito");
+            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.jsp?edicion=exito");
         } else {
-            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.html?error=bd");
+            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.jsp?error=bd");
         }
     }
 }

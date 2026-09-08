@@ -22,9 +22,9 @@ public class AgregarRackController extends HttpServlet {
         boolean exito = rackDAO.agregarRack(rack);
 
         if (exito) {
-            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.html?registro=exito");
+            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.jsp?registro=exito");
         } else {
-            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.html?error=bd");
+            response.sendRedirect(request.getContextPath() + "/Frontend/mapa_rack/racks.jsp?error=bd");
         }
     }
 }
