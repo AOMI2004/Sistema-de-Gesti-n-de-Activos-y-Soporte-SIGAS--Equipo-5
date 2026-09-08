@@ -163,12 +163,12 @@
         }
 
         function abrirModalEditar(matricula, nombre, correo, rol, estatus) {
-            document.getElementById('edit_matricula_hidden').value = matricula;
-            document.getElementById('edit_matricula_display').value = matricula;
-            document.getElementById('edit_nombre').value = nombre;
-            document.getElementById('edit_correo').value = correo;
-            document.getElementById('edit_rol').value = rol;
-            document.getElementById('edit_estatus').value = estatus;
+            document.getElementById('e_mat').value = matricula;
+            // no display id
+            document.getElementById('e_nom').value = nombre;
+            document.getElementById('e_cor').value = correo;
+            document.getElementById('e_rol').value = rol;
+            document.getElementById('e_est').value = estatus;
             new bootstrap.Modal(document.getElementById('editModal')).show();
         }
 </script></body>
