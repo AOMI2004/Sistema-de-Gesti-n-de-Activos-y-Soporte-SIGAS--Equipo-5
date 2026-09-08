@@ -37,42 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                <tr>
-                                    <td class="ps-4">
-                                        <div class="fw-bold text-dark">...</div>
-                                        <div class="text-muted small"><i class="bi bi-qr-code"></i> ...</div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar-sm me-2 ...">
-                                                ...
-                                            </div>
-                                            <div class="small fw-bold">...</div>
-                                        </div>
-                                    </td>
-                                    <td class="small text-muted">...</td>
-                                    <td class="small">
-                                        <span class="text-truncate d-inline-block" style="max-width: 250px;" title="...">
-                                            ...
-                                        </span>
-                                    </td>
-                                    <td>
-                                            <span class="badge rounded-pill bg-danger-light text-danger"><i class="bi bi-exclamation-circle"></i> Pendiente</span>
-                                            <span class="badge rounded-pill bg-warning-light text-warning"><i class="bi bi-tools"></i> En Reparación</span>
-                                            <span class="badge rounded-pill bg-success-light text-success" style="background-color: #dcfce7;"><i class="bi bi-check-circle"></i> Resuelto</span>
-                                    </td>
-                                    <td class="text-end pe-4">
-                                            <button class="btn btn-outline-success btn-sm fw-bold" onclick="confirmarResolucion('../../ResolverReporte?id_reporte=...&id_equipo=...')">
-                                                Resolver
-                                            </button>
-                                            <span class="text-muted small"><i class="bi bi-check2-all"></i> Cerrado</span>
-                                    </td>
-                                </tr>
-                                
-                                    <tr><td colspan="6" class="text-center py-5 text-muted"><i class="bi bi-inbox fs-1 d-block mb-2"></i> No hay reportes de fallas registrados en el sistema.</td></tr>
-                                
-                            </tbody>
+                        </tbody>
                         </table>
                     </div>
                 </div>

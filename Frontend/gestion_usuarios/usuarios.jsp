@@ -24,19 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        <tr>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td><span class="badge ...">...</span></td>
-                            <td>
-                                <a href="#" onclick="editUser('...', '...', '...', '...', '...')"><i class="bi bi-pencil me-2"></i></a>
-                                <a href="#" class="text-danger" onclick="confirmDel('...')"><i class="bi bi-trash"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
         </div>

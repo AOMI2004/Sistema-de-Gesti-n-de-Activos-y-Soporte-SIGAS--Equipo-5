@@ -57,22 +57,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            <tr>
-                                <td class="fw-bold">...</td>
-                                <td>... / ...</td>
-                                <td class="text-muted">...</td>
-                                <td><span class="badge ... bg-opacity-10 border rounded-pill px-3 py-2"><i class="bi ..."></i> ...</span></td>
-                                <td>
-                                    <a href="#" class="icon-action icon-edit" onclick="abrirModalEditar('...', '...', '...', '...', '...')">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '../../EliminarEquipo?id_qr=...')">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            
                         </tbody>
                     </table>
                 </div>

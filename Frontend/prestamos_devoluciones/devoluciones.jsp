@@ -85,23 +85,7 @@
                                 <tr><th>Folio</th><th>Usuario</th><th>Equipo (QR)</th><th>Fecha Salida</th><th>Estado</th><th>Acciones</th></tr>
                             </thead>
                             <tbody>
-                                
-                                <tr>
-                                    <td class="fw-bold text-primary">#...</td>
-                                    <td>...</td>
-                                    <td><span class="badge bg-secondary"><i class="bi bi-qr-code"></i> ...</span></td>
-                                    <td>...</td>
-                                    <td>
-                                        <span class="badge bg-warning text-dark px-3">En Préstamo</span>
-                                        <span class="badge bg-danger px-3">Falla</span>
-                                        <span class="badge bg-success px-3">Devuelto</span>
-                                    </td>
-                                    <td>
-                                            <a href="#" onclick="confirmarDevolucion('../../DevolverEquipo?id_prestamo=...&id_equipo=...')" class="btn btn-sm btn-outline-success fw-bold">Devolver Bien</a>
-                                            <span class="text-muted small"><i class="bi bi-check2-all"></i> Cerrado</span>
-                                    </td>
-                                </tr>
-                            </tbody>
+                        </tbody>
                         </table>
                     </div>
                 </div>

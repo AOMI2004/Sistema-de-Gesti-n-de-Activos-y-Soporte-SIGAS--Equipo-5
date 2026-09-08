@@ -55,19 +55,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            <tr>
-                                <td class="fw-bold">...</td>
-                                <td>...</td>
-                                <td class="text-muted small">...</td>
-                                <td><span class="badge ... px-3 py-2">...</span></td>
-                                <td><i class="bi bi-hdd-rack text-muted"></i> Rack #...</td>
-                                <td>
-                                    <a href="#" class="icon-action icon-edit" onclick="abrirModalEditar('...', '...', '...', '...', '...')"><i class="bi bi-pencil"></i></a>
-                                    <a href="#" class="icon-action icon-delete text-danger" onclick="confirmarEliminacion(event, '../../EliminarMaterial?id_material=...')"><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                            
                         </tbody>
                     </table>
                 </div>
