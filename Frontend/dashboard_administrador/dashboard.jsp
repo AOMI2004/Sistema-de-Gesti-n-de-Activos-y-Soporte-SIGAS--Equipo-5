@@ -1,4 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="backend.DAO.DashboardDAO" %>
+<%
+    DashboardDAO dashboardDAO = new DashboardDAO();
+    int prestados = dashboardDAO.getEquiposPrestados();
+    int bajoStock = dashboardDAO.getMaterialBajoStock();
+    int mantenimiento = dashboardDAO.getEquiposEnMantenimiento();
+    String ultimaAuditoria = dashboardDAO.getUltimaAuditoria();
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,7 +36,7 @@
                         <div class="stat-card d-flex justify-content-between align-items-center shadow-sm">
                             <div>
                                 <p class="text-muted mb-1 small fw-bold text-uppercase">Equipos Prestados Hoy</p>
-                                <h2 class="fw-bold mb-0">12</h2>
+                                <h2 class="fw-bold mb-0"><%= prestados %></h2>
                             </div>
                             <div class="stat-icon bg-primary bg-opacity-10 text-primary">
                                 <i class="bi bi-display"></i>
@@ -39,7 +48,7 @@
                         <div class="stat-card d-flex justify-content-between align-items-center shadow-sm">
                             <div>
                                 <p class="text-muted mb-1 small fw-bold text-uppercase">Material con Bajo Stock</p>
-                                <h2 class="fw-bold mb-0">3</h2>
+                                <h2 class="fw-bold mb-0"><%= bajoStock %></h2>
                             </div>
                             <div class="stat-icon bg-warning bg-opacity-10 text-warning">
                                 <i class="bi bi-exclamation-triangle"></i>
@@ -51,7 +60,7 @@
                         <div class="stat-card d-flex justify-content-between align-items-center shadow-sm">
                             <div>
                                 <p class="text-muted mb-1 small fw-bold text-uppercase">Equipos en Mantenimiento</p>
-                                <h2 class="fw-bold mb-0">5</h2>
+                                <h2 class="fw-bold mb-0"><%= mantenimiento %></h2>
                             </div>
                             <div class="stat-icon bg-secondary bg-opacity-10 text-secondary">
                                 <i class="bi bi-wrench"></i>
@@ -64,7 +73,7 @@
                     <div class="col-12">
                         <div class="card border-0 shadow-sm p-4">
                             <h5 class="fw-bold mb-3">Actividad de Auditoría Reciente</h5>
-                            <p class="text-muted small">Última auditoría QR realizada hace 2 horas por Admin.</p>
+                            <p class="text-muted small">Última auditoría general registrada el: <b><%= ultimaAuditoria %></b></p>
                         </div>
                     </div>
                 </div>
