@@ -5,14 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    // Configuración centralizada de la base de datos
-    private static final String DB_URL = "jdbc:mysql://localhost:4463/sigas_db";
+    // ConfiguraciÃ³n centralizada de la base de datos
+    private static final String DB_URL = "jdbc:mysql://localhost:4463/sigas_db?useSSL=false&allowPublicKeyRetrieval=true";
     private static final String DB_USER = "root"; 
     private static final String DB_PASSWORD = "SIGAS123";
 
     /**
-     * Obtiene una conexión a la base de datos MySQL.
-     * @return Connection objeto de conexión.
+     * Obtiene una conexiÃ³n a la base de datos MySQL.
+     * @return Connection objeto de conexiÃ³n.
      * @throws SQLException si ocurre un error de acceso a datos.
      */
     public static Connection getConnection() throws SQLException {
